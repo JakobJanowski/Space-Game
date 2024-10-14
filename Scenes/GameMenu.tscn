@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbb316m4ak5yt"]
+
+[ext_resource type="Script" path="res://Scripts/GameMenu.cs" id="1_2vffp"]
+[ext_resource type="Theme" uid="uid://dnvendquu3hv8" path="res://Themes/TextTheme.tres" id="1_otdd6"]
+[ext_resource type="PackedScene" uid="uid://bftke10wnpbw3" path="res://Scenes/settings_menu.tscn" id="3_4unok"]
+
+[node name="GameMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_2vffp")
+
+[node name="Main Menu" type="PanelContainer" parent="."]
+self_modulate = Color(0, 0, 1, 0.666667)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Main Menu"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main Menu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 150
+
+[node name="MenuLabel" type="Label" parent="Main Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_otdd6")
+text = "Main Menu"
+horizontal_alignment = 1
+
+[node name="Setting Button" type="Button" parent="Main Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_otdd6")
+text = "Settings"
+
+[node name="QuitButton" type="Button" parent="Main Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("1_otdd6")
+text = "Quit"
+
+[node name="Settings Menu" parent="." instance=ExtResource("3_4unok")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="Main Menu/MarginContainer/VBoxContainer/Setting Button" to="." method="_on_setting_button_pressed"]
+[connection signal="pressed" from="Main Menu/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

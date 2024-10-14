@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://diqkgla8gsbwk"
+path="res://.godot/imported/World Music - 582032__zhr__sci-fi-horror-music.mp3-13b129fc4d66ac0214a847419a532566.mp3str"
+
+[deps]
+
+source_file="res://Audio/Music/World Music - 582032__zhr__sci-fi-horror-music.mp3"
+dest_files=["res://.godot/imported/World Music - 582032__zhr__sci-fi-horror-music.mp3-13b129fc4d66ac0214a847419a532566.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

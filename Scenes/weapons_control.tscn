@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://difgt5kw7hqh8"]
+
+[ext_resource type="Script" path="res://Scripts/ToggleWeapons.cs" id="1_ktwvd"]
+[ext_resource type="PackedScene" uid="uid://b7lpxbco4pi40" path="res://Scenes/InfoPopUp.tscn" id="2_xo1ob"]
+[ext_resource type="Texture2D" uid="uid://vdj7s4xmi7at" path="res://Sprites/console_s_Modifed.png" id="3_j6w8h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xnsub"]
+size = Vector2(93, 60)
+
+[node name="WeaponsControl" type="Area2D"]
+collision_layer = 2
+script = ExtResource("1_ktwvd")
+UiText = ExtResource("2_xo1ob")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-53, 204)
+texture = ExtResource("3_j6w8h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-48.5, 228)
+shape = SubResource("RectangleShape2D_xnsub")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

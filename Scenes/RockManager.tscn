@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdrvbwr1w6wml"]
+
+[ext_resource type="Script" path="res://Scripts/RockManager.cs" id="1_5wekh"]
+[ext_resource type="PackedScene" uid="uid://cf6vnrjmltr6l" path="res://Scenes/SpaceRock.tscn" id="2_h7i1u"]
+
+[node name="RockManager" type="Node2D"]
+script = ExtResource("1_5wekh")
+Rock = ExtResource("2_h7i1u")

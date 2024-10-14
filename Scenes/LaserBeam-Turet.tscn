@@ -1,0 +1,76 @@
+[gd_scene load_steps=8 format=3 uid="uid://by5sluqqna5ca"]
+
+[ext_resource type="Script" path="res://Scripts/LaserBeamTuret.cs" id="1_4d46a"]
+[ext_resource type="PackedScene" uid="uid://ca676o5rpvmi3" path="res://Scenes/Laser.tscn" id="2_506gc"]
+[ext_resource type="Texture2D" uid="uid://bqr87sgeriytw" path="res://Sprites/Laser-Turret-Base.png" id="3_wgmou"]
+[ext_resource type="Texture2D" uid="uid://b0r0w4fy4sd1d" path="res://Sprites/LaserBeam-Turret-Turret.png" id="4_mwcaa"]
+[ext_resource type="Theme" uid="uid://dnvendquu3hv8" path="res://Themes/TextTheme.tres" id="5_b3hxv"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_xprmq"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vhxx5"]
+radius = 11.0
+height = 44.0
+
+[node name="Node2D" type="Node2D"]
+rotation = -1.5708
+script = ExtResource("1_4d46a")
+bullet = ExtResource("2_506gc")
+bullet = ExtResource("2_506gc")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+root_path = NodePath("../Turret")
+replication_config = SubResource("SceneReplicationConfig_xprmq")
+
+[node name="Base" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("3_wgmou")
+
+[node name="Turret" type="CharacterBody2D" parent="."]
+position = Vector2(-16, -1)
+collision_mask = 4
+motion_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Turret"]
+texture_filter = 1
+position = Vector2(18, -1)
+texture = ExtResource("4_mwcaa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Turret"]
+position = Vector2(6.99999, 2.99997)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_vhxx5")
+
+[node name="Label" type="Label" parent="Turret"]
+texture_filter = 1
+offset_left = 47.0
+offset_top = 12.0001
+offset_right = 101.0
+offset_bottom = 43.0001
+rotation = 1.5708
+theme = ExtResource("5_b3hxv")
+
+[node name="TurretCamera" type="Camera2D" parent="."]
+position = Vector2(385, 0)
+rotation = 1.5708
+ignore_rotation = false
+zoom = Vector2(0.75, 0.75)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[node name="Target" type="Node2D" parent="."]
+light_mask = 0
+visibility_layer = 0
+position = Vector2(-22, -2.00008)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://fergkxksimnu"]
+
+[ext_resource type="Script" path="res://Scripts/EnemyLaser.cs" id="1_yofy3"]
+[ext_resource type="PackedScene" uid="uid://bbsk41ju4g7s0" path="res://Scenes/EnemyBullet.tscn" id="2_boo4w"]
+[ext_resource type="Texture2D" uid="uid://bvux3sihopypv" path="res://Sprites/Laser-Turret-Turret.png" id="4_f5bp6"]
+[ext_resource type="AudioStream" uid="uid://lylprlslw180" path="res://Audio/SFX/Enemy_Laser.wav" id="4_wquhg"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vhxx5"]
+radius = 11.0
+height = 44.0
+
+[node name="Node2D" type="Node2D"]
+rotation = -1.5708
+script = ExtResource("1_yofy3")
+bullet = ExtResource("2_boo4w")
+
+[node name="Turret" type="CharacterBody2D" parent="."]
+position = Vector2(-16, -1)
+collision_mask = 14
+motion_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Turret"]
+texture_filter = 1
+position = Vector2(18, -1)
+texture = ExtResource("4_f5bp6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Turret"]
+position = Vector2(11, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_vhxx5")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[node name="Target" type="Node2D" parent="."]
+light_mask = 0
+visibility_layer = 0
+position = Vector2(21, 7.62939e-05)
+
+[node name="GunRange" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 14
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GunRange"]
+polygon = PackedVector2Array(15, -20, 650, -600, 650, 600, 15, 20)
+
+[node name="Effect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_wquhg")
+bus = &"SFX"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="GunRange" to="." method="_on_gun_range_body_entered"]
+[connection signal="body_exited" from="GunRange" to="." method="_on_gun_range_body_exited"]

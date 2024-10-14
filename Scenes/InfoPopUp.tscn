@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7lpxbco4pi40"]
+
+[ext_resource type="Theme" uid="uid://dnvendquu3hv8" path="res://Themes/TextTheme.tres" id="1_x4p07"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Container" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -189.0
+offset_top = -94.0
+offset_right = 189.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Device Label" type="Label" parent="Container"]
+self_modulate = Color(1, 1, 1, 0.392157)
+layout_mode = 2
+theme = ExtResource("1_x4p07")
+theme_override_font_sizes/font_size = 48
+text = "Navigation"
+horizontal_alignment = 1
+
+[node name="UseInfoLabel" type="Label" parent="Container"]
+self_modulate = Color(1, 1, 1, 0.392157)
+layout_mode = 2
+theme = ExtResource("1_x4p07")
+theme_override_font_sizes/font_size = 48
+text = "Press E to Use"

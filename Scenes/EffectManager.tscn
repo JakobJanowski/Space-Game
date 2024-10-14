@@ -1,0 +1,14 @@
+[gd_scene load_steps=6 format=3 uid="uid://1fa7e6k6m6n5"]
+
+[ext_resource type="Script" path="res://Scripts/EffectManager.cs" id="1_ylsir"]
+[ext_resource type="PackedScene" uid="uid://ct1buvns351xc" path="res://Scenes/RockExplosion.tscn" id="2_xegxe"]
+[ext_resource type="PackedScene" uid="uid://bqvd3lbj2t3bu" path="res://Scenes/Smokepft.tscn" id="3_8mjph"]
+[ext_resource type="PackedScene" uid="uid://1pbycdwo26wy" path="res://Scenes/HitExplosion.tscn" id="4_xejvm"]
+[ext_resource type="PackedScene" uid="uid://gy5h3rlt0032" path="res://Scenes/ShipDeathExplosion.tscn" id="5_c12qb"]
+
+[node name="EffectManager" type="Node2D"]
+script = ExtResource("1_ylsir")
+RockExplosion = ExtResource("2_xegxe")
+SmokeEmmision = ExtResource("3_8mjph")
+HitExplosion = ExtResource("4_xejvm")
+DeathExplosion = ExtResource("5_c12qb")

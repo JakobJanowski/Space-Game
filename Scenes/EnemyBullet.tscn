@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbsk41ju4g7s0"]
+
+[ext_resource type="Script" path="res://Scripts/Bullet.cs" id="1_i1f4b"]
+[ext_resource type="Texture2D" uid="uid://du0hwb1vowmau" path="res://Sprites/Turret-Bulltet.png" id="2_slua6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pmhm2"]
+radius = 7.0
+height = 48.0
+
+[node name="Bullet" type="Area2D" groups=["Bullet"]]
+collision_layer = 16
+collision_mask = 62
+script = ExtResource("1_i1f4b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("2_slua6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_pmhm2")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,108 @@
+[gd_scene load_steps=7 format=3 uid="uid://b308qkofjjslj"]
+
+[ext_resource type="Script" path="res://Scripts/Environment.cs" id="1_id5er"]
+[ext_resource type="PackedScene" uid="uid://qj25xaf7vaym" path="res://Scenes/WorldSegments/TopMiddleZones.tscn" id="2_oia2m"]
+[ext_resource type="PackedScene" uid="uid://cub4hkixi18i7" path="res://Scenes/WorldSegments/TopLeftZone.tscn" id="2_xbvks"]
+[ext_resource type="Script" path="res://Scripts/TaskHandler.cs" id="4_gjfad"]
+[ext_resource type="PackedScene" uid="uid://bvqce73yi60rx" path="res://Scenes/LostCrate.tscn" id="5_rnc5v"]
+[ext_resource type="PackedScene" uid="uid://dk6t2gpy4blht" path="res://Scenes/DeliveryDestination.tscn" id="6_tmynw"]
+
+[node name="Environment" type="Node2D"]
+script = ExtResource("1_id5er")
+
+[node name="TopMiddleZones12" parent="." instance=ExtResource("2_oia2m")]
+position = Vector2(926, 1698)
+rotation = 3.14159
+scale = Vector2(2, 2)
+
+[node name="TopMiddleZones11" parent="." instance=ExtResource("2_oia2m")]
+position = Vector2(94, 1654)
+scale = Vector2(2, 2)
+
+[node name="TopMiddleZones10" parent="." instance=ExtResource("2_oia2m")]
+position = Vector2(-667, 1715)
+scale = Vector2(2, 2)
+
+[node name="TopMiddleZones9" parent="." instance=ExtResource("2_oia2m")]
+position = Vector2(-648, 1018)
+rotation = -1.5708
+scale = Vector2(2, 2)
+
+[node name="TopMiddleZones8" parent="." instance=ExtResource("2_oia2m")]
+position = Vector2(-676, 186)
+scale = Vector2(2, 2)
+
+[node name="TopMiddleZones7" parent="." instance=ExtResource("2_oia2m")]
+position = Vector2(-609, -598)
+rotation = 1.5708
+scale = Vector2(2, 2)
+
+[node name="TopMiddleZones6" parent="." instance=ExtResource("2_oia2m")]
+position = Vector2(1517, 1680)
+scale = Vector2(2, 2)
+
+[node name="TopMiddleZones5" parent="." instance=ExtResource("2_oia2m")]
+position = Vector2(1517, 914)
+scale = Vector2(2, 2)
+
+[node name="TopMiddleZones4" parent="." instance=ExtResource("2_oia2m")]
+position = Vector2(1600, 191)
+rotation = 3.14159
+scale = Vector2(2, 2)
+
+[node name="TopMiddleZones3" parent="." instance=ExtResource("2_oia2m")]
+position = Vector2(1599, -576)
+rotation = 3.14159
+scale = Vector2(2, 2)
+
+[node name="TopMiddleZones2" parent="." instance=ExtResource("2_oia2m")]
+position = Vector2(832, -576)
+scale = Vector2(2, 2)
+
+[node name="TopMiddleZones" parent="." instance=ExtResource("2_oia2m")]
+position = Vector2(65, -573)
+scale = Vector2(2, 2)
+
+[node name="TopLeftZone" parent="." groups=["Segment"] instance=ExtResource("2_xbvks")]
+modulate = Color(0.447059, 1, 0.533333, 1)
+self_modulate = Color(0.94902, 0.901961, 0.537255, 1)
+position = Vector2(43, 69)
+
+[node name="TopLeftZone2" parent="." groups=["Segment"] instance=ExtResource("2_xbvks")]
+modulate = Color(1, 0, 1, 1)
+position = Vector2(44, 669)
+
+[node name="TopLeftZone4" parent="." groups=["Segment"] instance=ExtResource("2_xbvks")]
+modulate = Color(1, 0, 1, 1)
+position = Vector2(46, 1269)
+
+[node name="TopLeftZone5" parent="." groups=["Segment"] instance=ExtResource("2_xbvks")]
+modulate = Color(0, 0.682353, 0.894118, 1)
+position = Vector2(1238, 671)
+
+[node name="TopLeftZone6" parent="." groups=["Segment"] instance=ExtResource("2_xbvks")]
+modulate = Color(0, 0.682353, 0.894118, 1)
+position = Vector2(1239, 1270)
+
+[node name="TopLeftZone7" parent="." groups=["Segment"] instance=ExtResource("2_xbvks")]
+modulate = Color(0, 0.682353, 0.894118, 1)
+position = Vector2(643, 1269)
+
+[node name="TaskHandler" type="Node2D" parent="."]
+script = ExtResource("4_gjfad")
+LostCrate = ExtResource("5_rnc5v")
+CrateDestination = ExtResource("6_tmynw")
+
+[node name="TopLeftZone3" parent="." groups=["Segment"] instance=ExtResource("2_xbvks")]
+modulate = Color(0.447059, 1, 0.533333, 1)
+self_modulate = Color(0.94902, 0.901961, 0.537255, 1)
+position = Vector2(641, 69)
+
+[node name="TopLeftZone8" parent="." groups=["Segment"] instance=ExtResource("2_xbvks")]
+modulate = Color(0.447059, 1, 0.533333, 1)
+self_modulate = Color(0.94902, 0.901961, 0.537255, 1)
+position = Vector2(1239, 71)
+
+[node name="TopLeftZone9" parent="." groups=["Segment"] instance=ExtResource("2_xbvks")]
+modulate = Color(0.921569, 0, 0.164706, 1)
+position = Vector2(642, 669)

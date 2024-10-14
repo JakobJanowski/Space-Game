@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://bqvd3lbj2t3bu"]
+
+[ext_resource type="Texture2D" uid="uid://cxyy2pdeyevd" path="res://Sprites/JoyStick.png" id="1_xoril"]
+[ext_resource type="Script" path="res://Scripts/RockExplosion.cs" id="2_ux43r"]
+
+[sub_resource type="Gradient" id="Gradient_xs7xp"]
+colors = PackedColorArray(0.93845, 0.93845, 0.93845, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wam5e"]
+gradient = SubResource("Gradient_xs7xp")
+
+[sub_resource type="Curve" id="Curve_nxjit"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_4tfye"]
+curve = SubResource("Curve_nxjit")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_80315"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 50.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_curve = SubResource("CurveTexture_4tfye")
+color = Color(0.847059, 0.847059, 0.847059, 1)
+color_ramp = SubResource("GradientTexture1D_wam5e")
+
+[node name="RockExplosion" type="GPUParticles2D"]
+texture_filter = 1
+rotation = -1.5708
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_80315")
+texture = ExtResource("1_xoril")
+lifetime = 2.5
+explosiveness = 1.0
+script = ExtResource("2_ux43r")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

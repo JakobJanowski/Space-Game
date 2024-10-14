@@ -1,0 +1,415 @@
+[gd_scene load_steps=21 format=3 uid="uid://dd3rgvtodi18p"]
+
+[ext_resource type="PackedScene" uid="uid://yj0qirlt116w" path="res://Scenes/Interface.tscn" id="1_ernh8"]
+[ext_resource type="PackedScene" uid="uid://ddp426u5t2xkn" path="res://Scenes/Spaceship.tscn" id="1_ltkpi"]
+[ext_resource type="Script" path="res://Scripts/World.cs" id="1_p0ysm"]
+[ext_resource type="PackedScene" uid="uid://b308qkofjjslj" path="res://Scenes/Environment.tscn" id="2_hiear"]
+[ext_resource type="PackedScene" uid="uid://bmwkunjfcgnyu" path="res://Scenes/EnemySpawner.tscn" id="4_se5xt"]
+[ext_resource type="PackedScene" uid="uid://cf6vnrjmltr6l" path="res://Scenes/SpaceRock.tscn" id="7_52k4i"]
+[ext_resource type="PackedScene" uid="uid://qs8pjwhiwaod" path="res://Scenes/PirateSpawner.tscn" id="7_mjvcl"]
+[ext_resource type="AudioStream" uid="uid://dxd1d0nr4p2gt" path="res://Audio/Music/World Music - 608132__musicbymisterbates__sci-fi-evolving-soundtrack-alien-covenent.mp3" id="8_yl1hk"]
+[ext_resource type="AudioStream" uid="uid://diqkgla8gsbwk" path="res://Audio/Music/World Music - 582032__zhr__sci-fi-horror-music.mp3" id="9_2pgs5"]
+[ext_resource type="AudioStream" uid="uid://c0edid5ckv6nr" path="res://Audio/Music/World Music - 476556__magmisoundtracks__sci-fi-music-loop-01.mp3" id="10_byeet"]
+[ext_resource type="AudioStream" uid="uid://du76i01si3nh6" path="res://Audio/Music/Battle Music.mp3" id="11_ihn7r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_veobl"]
+size = Vector2(18862, 85)
+
+[sub_resource type="Gradient" id="Gradient_gmbeg"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_77hnc"]
+gradient = SubResource("Gradient_gmbeg")
+
+[sub_resource type="Gradient" id="Gradient_gf6an"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tegay"]
+gradient = SubResource("Gradient_gf6an")
+
+[sub_resource type="Gradient" id="Gradient_pwu40"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j84pa"]
+gradient = SubResource("Gradient_pwu40")
+
+[sub_resource type="Gradient" id="Gradient_7t84j"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_g2o6e"]
+gradient = SubResource("Gradient_7t84j")
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_p0ysm")
+
+[node name="Environment" parent="." instance=ExtResource("2_hiear")]
+scale = Vector2(10, 10)
+
+[node name="Interface" parent="." instance=ExtResource("1_ernh8")]
+
+[node name="Shapeship" parent="." instance=ExtResource("1_ltkpi")]
+
+[node name="Top Bound" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Top Bound"]
+position = Vector2(6089, -2808.5)
+shape = SubResource("RectangleShape2D_veobl")
+debug_color = Color(0, 0.25098, 0.294118, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Top Bound"]
+self_modulate = Color(1, 1, 1, 0.196078)
+texture_filter = 1
+position = Vector2(6222, -2808)
+scale = Vector2(290, 5)
+texture = SubResource("GradientTexture2D_77hnc")
+
+[node name="Bottem Bound" type="StaticBody2D" parent="."]
+position = Vector2(166, 17932)
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bottem Bound"]
+position = Vector2(6089, -2808.5)
+shape = SubResource("RectangleShape2D_veobl")
+debug_color = Color(0, 0.25098, 0.294118, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Bottem Bound"]
+self_modulate = Color(1, 1, 1, 0.196078)
+texture_filter = 1
+position = Vector2(6051, -2830)
+scale = Vector2(290, 5)
+texture = SubResource("GradientTexture2D_tegay")
+
+[node name="Top Bound2" type="StaticBody2D" parent="."]
+position = Vector2(-5756, 188)
+rotation = 1.5708
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Top Bound2"]
+position = Vector2(6089, -2808.5)
+shape = SubResource("RectangleShape2D_veobl")
+debug_color = Color(0, 0.25098, 0.294118, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Top Bound2"]
+self_modulate = Color(1, 1, 1, 0.196078)
+texture_filter = 1
+position = Vector2(5952.5, -2857.73)
+scale = Vector2(285, 5)
+texture = SubResource("GradientTexture2D_j84pa")
+
+[node name="Top Bound3" type="StaticBody2D" parent="."]
+position = Vector2(12536, 144)
+rotation = 1.5708
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Top Bound3"]
+position = Vector2(6089, -2808.5)
+shape = SubResource("RectangleShape2D_veobl")
+debug_color = Color(0, 0.25098, 0.294118, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Top Bound3"]
+self_modulate = Color(1, 1, 1, 0.196078)
+texture_filter = 1
+position = Vector2(6002.5, -2755.63)
+scale = Vector2(285, 5)
+texture = SubResource("GradientTexture2D_g2o6e")
+
+[node name="EnemySpawners" type="Node2D" parent="."]
+
+[node name="EnemySpawner2" parent="EnemySpawners" instance=ExtResource("4_se5xt")]
+position = Vector2(-2038, -62)
+
+[node name="EnemySpawner3" parent="EnemySpawners" instance=ExtResource("4_se5xt")]
+position = Vector2(2272, 2309)
+
+[node name="EnemySpawner4" parent="EnemySpawners" instance=ExtResource("4_se5xt")]
+position = Vector2(-5, 7080)
+
+[node name="EnemySpawner5" parent="EnemySpawners" instance=ExtResource("4_se5xt")]
+position = Vector2(5844, 6888)
+
+[node name="EnemySpawner6" parent="EnemySpawners" instance=ExtResource("4_se5xt")]
+position = Vector2(4445, 8860)
+
+[node name="EnemySpawner7" parent="EnemySpawners" instance=ExtResource("4_se5xt")]
+position = Vector2(11909, 5977)
+
+[node name="EnemySpawner" parent="EnemySpawners" instance=ExtResource("4_se5xt")]
+position = Vector2(6699, 585)
+
+[node name="EnemySpawner8" parent="EnemySpawners" instance=ExtResource("4_se5xt")]
+position = Vector2(-413, 10910)
+
+[node name="EnemySpawner9" parent="EnemySpawners" instance=ExtResource("4_se5xt")]
+position = Vector2(13836, 12891)
+
+[node name="EnemySpawner10" parent="EnemySpawners" instance=ExtResource("4_se5xt")]
+position = Vector2(13248, -715)
+
+[node name="Delivery Locations" type="Node2D" parent="."]
+
+[node name="Location" type="Node2D" parent="Delivery Locations"]
+position = Vector2(1571, 1873)
+
+[node name="Location2" type="Node2D" parent="Delivery Locations"]
+position = Vector2(635, 10421)
+
+[node name="Location3" type="Node2D" parent="Delivery Locations"]
+position = Vector2(14166, 4138)
+
+[node name="Location4" type="Node2D" parent="Delivery Locations"]
+position = Vector2(11085, 13471)
+
+[node name="Location5" type="Node2D" parent="Delivery Locations"]
+position = Vector2(8155, -2325)
+
+[node name="Lost Crate Spawns" type="Node2D" parent="."]
+
+[node name="Location" type="Node2D" parent="Lost Crate Spawns"]
+position = Vector2(1058, -1118)
+
+[node name="Location2" type="Node2D" parent="Lost Crate Spawns"]
+position = Vector2(1722, 4712)
+
+[node name="Location3" type="Node2D" parent="Lost Crate Spawns"]
+position = Vector2(8488, 4893)
+
+[node name="Location4" type="Node2D" parent="Lost Crate Spawns"]
+position = Vector2(7370, 12022)
+
+[node name="Location5" type="Node2D" parent="Lost Crate Spawns"]
+position = Vector2(3202, 7008)
+
+[node name="Location6" type="Node2D" parent="Lost Crate Spawns"]
+position = Vector2(12475, 9001)
+
+[node name="Location7" type="Node2D" parent="Lost Crate Spawns"]
+position = Vector2(12444, 2114)
+
+[node name="Location8" type="Node2D" parent="Lost Crate Spawns"]
+position = Vector2(1903, 12837)
+
+[node name="Location9" type="Node2D" parent="Lost Crate Spawns"]
+position = Vector2(5316, -393)
+
+[node name="SpaceRock" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(3429, 5125)
+scale = Vector2(50, 50)
+
+[node name="SpaceRock2" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(5637, 2573)
+scale = Vector2(25, 25)
+
+[node name="SpaceRock3" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(6789, -339)
+scale = Vector2(25, 25)
+
+[node name="SpaceRock4" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(9315, 8218)
+scale = Vector2(25, 25)
+
+[node name="SpaceRock5" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(-264, 9044)
+scale = Vector2(25, 25)
+
+[node name="SpaceRock6" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(4564, 9922)
+scale = Vector2(25, 25)
+
+[node name="SpaceRock7" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(12736, 12237)
+scale = Vector2(25, 25)
+
+[node name="SpaceRock8" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(6572, 3158)
+scale = Vector2(10, 10)
+
+[node name="SpaceRock9" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(5143, 3942)
+scale = Vector2(10, 10)
+
+[node name="SpaceRock10" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(6956, 4285)
+scale = Vector2(10, 10)
+
+[node name="SpaceRock11" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(8190, 4512)
+scale = Vector2(10, 10)
+
+[node name="SpaceRock12" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(1337, 6263)
+scale = Vector2(10, 10)
+
+[node name="SpaceRock13" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(-769, 7805)
+scale = Vector2(10, 10)
+
+[node name="SpaceRock14" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(3883, 7286)
+scale = Vector2(10, 10)
+
+[node name="SpaceRock15" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(3793, -149)
+scale = Vector2(10, 10)
+
+[node name="SpaceRock16" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(-1929, -2241)
+scale = Vector2(10, 10)
+
+[node name="SpaceRock17" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(8933, -1272)
+scale = Vector2(10, 10)
+
+[node name="SpaceRock18" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(8275, 8591)
+scale = Vector2(10, 10)
+
+[node name="SpaceRock19" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(9685, 6327)
+scale = Vector2(10, 10)
+
+[node name="SpaceRock20" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(13380, 4170)
+scale = Vector2(10, 10)
+
+[node name="SpaceRock21" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(13188, 1394)
+scale = Vector2(10, 10)
+
+[node name="SpaceRock22" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(11671, 91.001)
+scale = Vector2(10, 10)
+
+[node name="SpaceRock23" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(6227, 13422)
+scale = Vector2(10, 10)
+
+[node name="SpaceRock24" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(35.0005, 13815)
+scale = Vector2(10, 10)
+
+[node name="SpaceRock25" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(-1264, 11927)
+scale = Vector2(10, 10)
+
+[node name="SpaceRock26" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(13143, 9163)
+scale = Vector2(10, 10)
+
+[node name="SpaceRock27" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(10171, 13046)
+scale = Vector2(10, 10)
+
+[node name="SpaceRock28" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(11466, 10531)
+scale = Vector2(10, 10)
+
+[node name="SpaceRock29" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(8870, 7381)
+scale = Vector2(5, 5)
+
+[node name="SpaceRock30" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(7911, 3224)
+scale = Vector2(5, 5)
+
+[node name="SpaceRock31" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(586.001, 5167)
+scale = Vector2(5, 5)
+
+[node name="SpaceRock32" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(5469, 6777)
+scale = Vector2(5, 5)
+
+[node name="SpaceRock33" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(10292, 10357)
+scale = Vector2(5, 5)
+
+[node name="SpaceRock34" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(13769, 9738)
+scale = Vector2(5, 5)
+
+[node name="SpaceRock35" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(12925, 7657)
+scale = Vector2(5, 5)
+
+[node name="SpaceRock36" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(12343, 10269)
+scale = Vector2(5, 5)
+
+[node name="SpaceRock37" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(-633, 1901)
+scale = Vector2(5, 5)
+
+[node name="SpaceRock38" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(1699, 920.001)
+scale = Vector2(5, 5)
+
+[node name="SpaceRock39" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(-1765, 3653)
+scale = Vector2(5, 5)
+
+[node name="SpaceRock40" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(2292, -1882)
+scale = Vector2(5, 5)
+
+[node name="SpaceRock41" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(8137, 14200)
+scale = Vector2(5, 5)
+
+[node name="SpaceRock42" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(8047, 10734)
+scale = Vector2(5, 5)
+
+[node name="SpaceRock43" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(9089, 11884)
+scale = Vector2(5, 5)
+
+[node name="SpaceRock44" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(13956, 14362)
+scale = Vector2(5, 5)
+
+[node name="SpaceRock45" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(2767, 14380)
+scale = Vector2(5, 5)
+
+[node name="SpaceRock46" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(6359, 8184)
+scale = Vector2(5, 5)
+
+[node name="SpaceRock47" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(12896, 6172)
+scale = Vector2(5, 5)
+
+[node name="SpaceRock48" parent="." instance=ExtResource("7_52k4i")]
+position = Vector2(13470, -1748)
+scale = Vector2(5, 5)
+
+[node name="PirateSpawner" parent="." instance=ExtResource("7_mjvcl")]
+position = Vector2(10307, 1519)
+
+[node name="PirateSpawner2" parent="." instance=ExtResource("7_mjvcl")]
+position = Vector2(2624, 11998)
+
+[node name="Music1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_yl1hk")
+bus = &"Music"
+
+[node name="Music2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_2pgs5")
+bus = &"Music"
+
+[node name="Music3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_byeet")
+bus = &"Music"
+
+[node name="BattleMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_ihn7r")
+bus = &"Music"
+
+[connection signal="finished" from="Music1" to="." method="_on_music_1_finished"]
+[connection signal="finished" from="Music2" to="." method="_on_music_2_finished"]
+[connection signal="finished" from="Music3" to="." method="_on_music_3_finished"]
