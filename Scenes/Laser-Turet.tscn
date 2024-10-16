@@ -1,0 +1,81 @@
+[gd_scene load_steps=9 format=3 uid="uid://ch2guwuajldky"]
+
+[ext_resource type="Texture2D" uid="uid://bqr87sgeriytw" path="res://Sprites/Laser-Turret-Base.png" id="1_7as22"]
+[ext_resource type="Script" path="res://Scripts/LaserTuret.cs" id="1_kb0b4"]
+[ext_resource type="PackedScene" uid="uid://bea7ddshw0f1n" path="res://Scenes/Bullet.tscn" id="2_a37gx"]
+[ext_resource type="Texture2D" uid="uid://bvux3sihopypv" path="res://Sprites/Laser-Turret-Turret.png" id="2_khkth"]
+[ext_resource type="AudioStream" uid="uid://lylprlslw180" path="res://Audio/SFX/Enemy_Laser.wav" id="5_72mn0"]
+[ext_resource type="Theme" uid="uid://dnvendquu3hv8" path="res://Themes/TextTheme.tres" id="6_deemr"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_xprmq"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vhxx5"]
+radius = 11.0
+height = 44.0
+
+[node name="Node2D" type="Node2D"]
+rotation = -1.5708
+script = ExtResource("1_kb0b4")
+bullet = ExtResource("2_a37gx")
+bullet = ExtResource("2_a37gx")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+root_path = NodePath("../Turret")
+replication_config = SubResource("SceneReplicationConfig_xprmq")
+
+[node name="Base" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_7as22")
+
+[node name="Turret" type="CharacterBody2D" parent="."]
+position = Vector2(-16, -1)
+collision_mask = 4
+motion_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Turret"]
+texture_filter = 1
+position = Vector2(18, -1)
+texture = ExtResource("2_khkth")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Turret"]
+position = Vector2(11, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_vhxx5")
+
+[node name="Label" type="Label" parent="Turret"]
+texture_filter = 1
+offset_left = 47.0
+offset_top = 12.0001
+offset_right = 101.0
+offset_bottom = 43.0001
+rotation = 1.5708
+theme = ExtResource("6_deemr")
+
+[node name="TurretCamera" type="Camera2D" parent="."]
+position = Vector2(385, 0.001)
+rotation = 1.5708
+ignore_rotation = false
+zoom = Vector2(0.75, 0.75)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[node name="Target" type="Node2D" parent="."]
+light_mask = 0
+visibility_layer = 0
+position = Vector2(21, 7.62939e-05)
+
+[node name="Effect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_72mn0")
+bus = &"SFX"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

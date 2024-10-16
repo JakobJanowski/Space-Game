@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvcupfrcctlsc"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerShield.cs" id="1_l0823"]
+[ext_resource type="Texture2D" uid="uid://bji65xueg3ru3" path="res://Sprites/Basic ShieldRounded.png" id="2_iqr1v"]
+[ext_resource type="AudioStream" uid="uid://bpr5mq40lp02s" path="res://Audio/SFX/609025__colorscrimsontears__power-down-2-rpg.wav" id="3_yqtmb"]
+
+[node name="Shield1" type="StaticBody2D" groups=["Shield"]]
+position = Vector2(1, -173)
+disable_mode = 2
+collision_layer = 8
+collision_mask = 20
+script = ExtResource("1_l0823")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.294118)
+texture_filter = 1
+position = Vector2(-6.5, -31.5)
+scale = Vector2(14.62, 4.6)
+texture = ExtResource("2_iqr1v")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-20, -100, 50, -60, 52, -3, -20, 36, -20, 69, 125, -2, 125, -60, -20, -132)
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Break" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_yqtmb")
+bus = &"SFX"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

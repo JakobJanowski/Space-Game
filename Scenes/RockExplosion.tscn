@@ -1,0 +1,120 @@
+[gd_scene load_steps=18 format=3 uid="uid://ct1buvns351xc"]
+
+[ext_resource type="Texture2D" uid="uid://cxyy2pdeyevd" path="res://Sprites/JoyStick.png" id="1_5gpap"]
+[ext_resource type="Script" path="res://Scripts/RockExplosion.cs" id="2_ci05h"]
+
+[sub_resource type="Gradient" id="Gradient_fm37b"]
+offsets = PackedFloat32Array(0, 0.0212766, 0.978723, 0.985816, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 0, 0.133333, 1, 0.120567, 0.120567, 0.120567, 1, 0.422462, 0.422462, 0.422462, 1, 0.901961, 0.27451, 0.403922, 0.427451)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5n1ky"]
+gradient = SubResource("Gradient_fm37b")
+
+[sub_resource type="Curve" id="Curve_ojo33"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_g75wh"]
+curve = SubResource("Curve_ojo33")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_egcrb"]
+emission_shape = 1
+emission_sphere_radius = 15.0
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_curve = SubResource("CurveTexture_g75wh")
+color = Color(1, 0.0431373, 0.133333, 1)
+color_ramp = SubResource("GradientTexture1D_5n1ky")
+sub_emitter_mode = 1
+sub_emitter_frequency = 4.0
+
+[sub_resource type="Gradient" id="Gradient_jktcd"]
+offsets = PackedFloat32Array(0, 0.269504, 0.51773, 0.815603, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.728325, 0.372247, 0, 1, 0.593286, 0.15267, 4.81308e-08, 1, 0.481273, 1.09497e-06, 2.40654e-07, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0434t"]
+gradient = SubResource("Gradient_jktcd")
+
+[sub_resource type="Curve" id="Curve_iwrxd"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.01755, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_nko8s"]
+curve = SubResource("Curve_iwrxd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6cthb"]
+emission_shape = 1
+emission_sphere_radius = 25.0
+particle_flag_disable_z = true
+direction = Vector3(1, 1, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 30.0
+initial_velocity_max = 30.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_curve = SubResource("CurveTexture_nko8s")
+color = Color(1, 1, 0, 1)
+color_ramp = SubResource("GradientTexture1D_0434t")
+
+[sub_resource type="Gradient" id="Gradient_i2lob"]
+colors = PackedColorArray(0, 0, 0, 1, 0.639216, 0.639216, 0.639216, 0.2)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_olw6h"]
+gradient = SubResource("Gradient_i2lob")
+
+[sub_resource type="Curve" id="Curve_egenc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.14874, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_k11c1"]
+curve = SubResource("Curve_egenc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tjb7o"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_max = 50.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_curve = SubResource("CurveTexture_k11c1")
+color_ramp = SubResource("GradientTexture1D_olw6h")
+
+[node name="RockExplosion" type="GPUParticles2D"]
+texture_filter = 1
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_egcrb")
+texture = ExtResource("1_5gpap")
+lifetime = 2.5
+explosiveness = 1.0
+script = ExtResource("2_ci05h")
+
+[node name="EX1" type="GPUParticles2D" parent="."]
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_6cthb")
+texture = ExtResource("1_5gpap")
+lifetime = 2.5
+explosiveness = 1.0
+randomness = 1.0
+
+[node name="EX2" type="GPUParticles2D" parent="."]
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_tjb7o")
+texture = ExtResource("1_5gpap")
+lifetime = 2.5
+explosiveness = 1.0
+randomness = 1.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

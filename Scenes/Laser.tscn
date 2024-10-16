@@ -1,0 +1,92 @@
+[gd_scene load_steps=14 format=3 uid="uid://ca676o5rpvmi3"]
+
+[ext_resource type="Script" path="res://Scripts/Laser.cs" id="1_ksm2l"]
+[ext_resource type="Texture2D" uid="uid://cxyy2pdeyevd" path="res://Sprites/JoyStick.png" id="2_boew5"]
+[ext_resource type="AudioStream" uid="uid://cexigtnvkmcfb" path="res://Audio/SFX/375922__glitchedtones__laser-beam-hits-and-disintegrates-object.mp3" id="3_om6p7"]
+
+[sub_resource type="Gradient" id="Gradient_b3g0d"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_klapx"]
+gradient = SubResource("Gradient_b3g0d")
+
+[sub_resource type="Curve" id="Curve_ifkrb"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_lrlk4"]
+curve = SubResource("Curve_ifkrb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1b2nm"]
+emission_shape = 1
+emission_sphere_radius = 16.0
+particle_flag_disable_z = true
+spread = 70.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 120.0
+initial_velocity_max = 130.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_curve = SubResource("CurveTexture_lrlk4")
+color = Color(1, 0, 0, 1)
+color_ramp = SubResource("GradientTexture1D_klapx")
+
+[sub_resource type="Gradient" id="Gradient_f31ka"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kk0pm"]
+gradient = SubResource("Gradient_f31ka")
+
+[sub_resource type="Curve" id="Curve_x2knm"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qyg0u"]
+curve = SubResource("Curve_x2knm")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ihelp"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+tangential_accel_min = 100.0
+tangential_accel_max = 100.0
+scale_min = 0.5
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_qyg0u")
+color = Color(1, 0, 0, 1)
+color_ramp = SubResource("GradientTexture1D_kk0pm")
+
+[node name="Laser" type="Node2D"]
+rotation = -1.5708
+script = ExtResource("1_ksm2l")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 0)
+default_color = Color(1, 0, 0, 1)
+
+[node name="LaserRayCast" type="RayCast2D" parent="."]
+target_position = Vector2(500, 0)
+collision_mask = 116
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="HitPoint" type="GPUParticles2D" parent="."]
+texture_filter = 1
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_1b2nm")
+texture = ExtResource("2_boew5")
+lifetime = 0.35
+
+[node name="LaserSpark" type="GPUParticles2D" parent="."]
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_ihelp")
+texture = ExtResource("2_boew5")
+
+[node name="Effect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_om6p7")
+bus = &"SFX"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

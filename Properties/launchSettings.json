@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "2D Multiplayer Space Game Project": {
+      "commandName": "Project"
+    },
+    "Start in Godot": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\Kuba\\Downloads\\Godot_v4.1.3-stable_mono_win64\\Godot_v4.1.3-stable_mono_win64\\Godot_v4.1.3-stable_mono_win64.exe",
+      "commandLineArgs": "--path. --verbose",
+      "workingDirectory": ".",
+      "nativeDebugging": true
+    }
+  }
+}

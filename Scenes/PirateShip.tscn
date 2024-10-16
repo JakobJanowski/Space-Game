@@ -1,0 +1,147 @@
+[gd_scene load_steps=13 format=3 uid="uid://drhnds504co4s"]
+
+[ext_resource type="Script" path="res://Scripts/PirateShip.cs" id="1_3p5bd"]
+[ext_resource type="Texture2D" uid="uid://7dhbbi1q7ci7" path="res://Sprites/PirateShip.png" id="1_algwr"]
+[ext_resource type="PackedScene" uid="uid://fergkxksimnu" path="res://Scenes/EnemyLaser.tscn" id="3_03g6x"]
+[ext_resource type="Texture2D" uid="uid://drgylqkcxamf" path="res://Sprites/PirateShip-Middle.png" id="3_myrd7"]
+[ext_resource type="PackedScene" uid="uid://qbymd8ggkx2u" path="res://Scenes/PlayerShield.tscn" id="4_jhnat"]
+[ext_resource type="Texture2D" uid="uid://c2pp1cw1f3lh3" path="res://Sprites/PirateShip-Moving.png" id="4_q2fhr"]
+[ext_resource type="PackedScene" uid="uid://bvcupfrcctlsc" path="res://Scenes/PlayerShieldRound.tscn" id="5_3aiiv"]
+[ext_resource type="Texture2D" uid="uid://b37tjo0vcr810" path="res://Sprites/PirateShip-Spin1.png" id="5_22ofx"]
+[ext_resource type="Texture2D" uid="uid://dpwb0fhc7l2p2" path="res://Sprites/PirateShip-Spin2.png" id="6_1g7ss"]
+[ext_resource type="AudioStream" uid="uid://cm01lf6kwbyui" path="res://Audio/SFX/725828__cliftonmcarlson__spaceship-engine-bass.mp3" id="10_u68r4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j6es3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_algwr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_myrd7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_q2fhr")
+}],
+"loop": false,
+"name": &"Inbetween",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_q2fhr")
+}],
+"loop": true,
+"name": &"Moving",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_22ofx")
+}],
+"loop": false,
+"name": &"Spin1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_1g7ss")
+}],
+"loop": false,
+"name": &"Spin2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_algwr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ghgby"]
+radius = 2385.34
+
+[node name="PirateShip" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["Enemy"]]
+collision_layer = 16
+collision_mask = 14
+script = ExtResource("1_3p5bd")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_j6es3")
+animation = &"Inbetween"
+frame = 2
+frame_progress = 1.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CharacterBody2D"]
+polygon = PackedVector2Array(-137, -117, -348, 16, -347, 83, -286, 132, 254, 132, 276, 93, 269, -96, 129, -157, -4, -153)
+
+[node name="Laser1" parent="CharacterBody2D" instance=ExtResource("3_03g6x")]
+position = Vector2(-148, -127)
+rotation = -2.0368
+
+[node name="Laser2" parent="CharacterBody2D" instance=ExtResource("3_03g6x")]
+position = Vector2(-255, -68)
+rotation = -2.0368
+
+[node name="Laser3" parent="CharacterBody2D" instance=ExtResource("3_03g6x")]
+position = Vector2(300, 69)
+rotation = 0.0
+
+[node name="Shield1" parent="CharacterBody2D" instance=ExtResource("4_jhnat")]
+position = Vector2(-8, 170)
+collision_layer = 64
+collision_mask = 22
+
+[node name="Shield2" parent="CharacterBody2D" instance=ExtResource("5_3aiiv")]
+position = Vector2(-120, -62)
+rotation = 3.83972
+scale = Vector2(1.5, 3)
+collision_layer = 64
+collision_mask = 22
+
+[node name="Shield3" parent="CharacterBody2D" instance=ExtResource("5_3aiiv")]
+position = Vector2(216, 20)
+rotation = -0.93026
+scale = Vector2(1.5, 3)
+collision_layer = 64
+collision_mask = 22
+
+[node name="Points" type="Node2D" parent="CharacterBody2D"]
+
+[node name="Point1" type="Node2D" parent="CharacterBody2D/Points"]
+position = Vector2(-34, 106)
+
+[node name="Point2" type="Node2D" parent="CharacterBody2D/Points"]
+position = Vector2(-186, -80)
+
+[node name="Point3" type="Node2D" parent="CharacterBody2D/Points"]
+position = Vector2(208, -83)
+
+[node name="Engine" type="AudioStreamPlayer2D" parent="CharacterBody2D"]
+stream = ExtResource("10_u68r4")
+autoplay = true
+bus = &"SFX"
+
+[node name="Timer" type="Timer" parent="CharacterBody2D"]
+wait_time = 10.0
+autostart = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 14
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_ghgby")
+
+[connection signal="EnemyInRange" from="CharacterBody2D/Laser1" to="CharacterBody2D" method="_on_laser_1_enemy_in_range"]
+[connection signal="EnemyInRange" from="CharacterBody2D/Laser2" to="CharacterBody2D" method="_on_laser_2_enemy_in_range"]
+[connection signal="EnemyInRange" from="CharacterBody2D/Laser3" to="CharacterBody2D" method="_on_laser_3_enemy_in_range"]
+[connection signal="timeout" from="CharacterBody2D/Timer" to="CharacterBody2D" method="_on_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="CharacterBody2D" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="CharacterBody2D" method="_on_area_2d_body_exited"]

@@ -1,0 +1,185 @@
+[gd_scene load_steps=7 format=3 uid="uid://bftke10wnpbw3"]
+
+[ext_resource type="Script" path="res://Scripts/settings_menu.cs" id="1_awj27"]
+[ext_resource type="Texture2D" uid="uid://5eeqhqmex6v3" path="res://Sprites/005_6.png" id="2_0j8b6"]
+[ext_resource type="Script" path="res://Scripts/Display.cs" id="3_3g6ls"]
+[ext_resource type="Theme" uid="uid://dnvendquu3hv8" path="res://Themes/TextTheme.tres" id="4_jigye"]
+[ext_resource type="AudioStream" uid="uid://bsr4okljbxvy" path="res://Audio/SFX/711795__plasma4__click-sound.mp3" id="5_30gb7"]
+[ext_resource type="Script" path="res://Scripts/AudioMenu.cs" id="6_elmrl"]
+
+[node name="Settings Menu" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_awj27")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color(1, 1, 1, 0.705882)
+layout_mode = 2
+texture = ExtResource("2_0j8b6")
+
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect"]
+layout_mode = 2
+offset_right = 1152.0
+offset_bottom = 648.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="TabContainer" type="TabContainer" parent="TextureRect/MarginContainer"]
+layout_mode = 2
+
+[node name="Display" type="GridContainer" parent="TextureRect/MarginContainer/TabContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 500
+theme_override_constants/v_separation = 20
+columns = 2
+script = ExtResource("3_3g6ls")
+
+[node name="DisplaySettingMenu" type="Label" parent="TextureRect/MarginContainer/TabContainer/Display"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_jigye")
+text = "Display Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="TextureRect/MarginContainer/TabContainer/Display"]
+layout_mode = 2
+
+[node name="VsyncLabel" type="Label" parent="TextureRect/MarginContainer/TabContainer/Display"]
+layout_mode = 2
+theme = ExtResource("4_jigye")
+text = "V-sync:"
+
+[node name="VsyncButton" type="CheckButton" parent="TextureRect/MarginContainer/TabContainer/Display"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("4_jigye")
+button_pressed = true
+
+[node name="BrightnessLabel" type="Label" parent="TextureRect/MarginContainer/TabContainer/Display"]
+layout_mode = 2
+theme = ExtResource("4_jigye")
+text = "Brightness:"
+
+[node name="BrightnessButton" type="HSlider" parent="TextureRect/MarginContainer/TabContainer/Display"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("4_jigye")
+min_value = 0.5
+max_value = 1.5
+step = 0.01
+value = 1.0
+
+[node name="Reset Button" type="Button" parent="TextureRect/MarginContainer/TabContainer/Display"]
+layout_mode = 2
+theme = ExtResource("4_jigye")
+text = "Reset to Default"
+
+[node name="GoBack Button" type="Button" parent="TextureRect/MarginContainer/TabContainer/Display"]
+layout_mode = 2
+theme = ExtResource("4_jigye")
+text = "Close"
+
+[node name="Click" type="AudioStreamPlayer" parent="TextureRect/MarginContainer/TabContainer/Display"]
+stream = ExtResource("5_30gb7")
+volume_db = 10.0
+bus = &"SFX"
+
+[node name="Audio" type="GridContainer" parent="TextureRect/MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("4_jigye")
+theme_override_constants/h_separation = 500
+theme_override_constants/v_separation = 20
+columns = 2
+script = ExtResource("6_elmrl")
+
+[node name="DisplaySettingMenu" type="Label" parent="TextureRect/MarginContainer/TabContainer/Audio"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_jigye")
+text = "Audio Settings"
+
+[node name="Label" type="Label" parent="TextureRect/MarginContainer/TabContainer/Audio"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MasterVolumeButton" type="Label" parent="TextureRect/MarginContainer/TabContainer/Audio"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_jigye")
+text = "Master Volume"
+
+[node name="MasterVolumeSlider" type="HSlider" parent="TextureRect/MarginContainer/TabContainer/Audio"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_jigye")
+max_value = 1.0
+step = 0.001
+value = 0.7
+
+[node name="MusicVolumeButton" type="Label" parent="TextureRect/MarginContainer/TabContainer/Audio"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_jigye")
+text = "Music Volume"
+
+[node name="MusicVolumeSlider" type="HSlider" parent="TextureRect/MarginContainer/TabContainer/Audio"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_jigye")
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="EffectVolumeButton" type="Label" parent="TextureRect/MarginContainer/TabContainer/Audio"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_jigye")
+text = "Sound Effect Volume"
+
+[node name="EffectVolumeSlider" type="HSlider" parent="TextureRect/MarginContainer/TabContainer/Audio"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_jigye")
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="Reset Button" type="Button" parent="TextureRect/MarginContainer/TabContainer/Audio"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_jigye")
+text = "Reset to Default"
+
+[node name="GoBack Button" type="Button" parent="TextureRect/MarginContainer/TabContainer/Audio"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_jigye")
+text = "Close"
+
+[node name="Click" type="AudioStreamPlayer" parent="TextureRect/MarginContainer/TabContainer/Audio"]
+stream = ExtResource("5_30gb7")
+volume_db = 10.0
+bus = &"SFX"
+
+[connection signal="visibility_changed" from="TextureRect/MarginContainer/TabContainer/Display" to="TextureRect/MarginContainer/TabContainer/Display" method="_on_visibility_changed"]
+[connection signal="toggled" from="TextureRect/MarginContainer/TabContainer/Display/VsyncButton" to="TextureRect/MarginContainer/TabContainer/Display" method="_on_vsync_button_toggled"]
+[connection signal="value_changed" from="TextureRect/MarginContainer/TabContainer/Display/BrightnessButton" to="TextureRect/MarginContainer/TabContainer/Display" method="_on_brightness_button_value_changed"]
+[connection signal="pressed" from="TextureRect/MarginContainer/TabContainer/Display/Reset Button" to="TextureRect/MarginContainer/TabContainer/Display" method="_on_reset_button_pressed"]
+[connection signal="pressed" from="TextureRect/MarginContainer/TabContainer/Display/GoBack Button" to="." method="_on_go_back_button_pressed"]
+[connection signal="visibility_changed" from="TextureRect/MarginContainer/TabContainer/Audio" to="TextureRect/MarginContainer/TabContainer/Audio" method="_on_visibility_changed"]
+[connection signal="value_changed" from="TextureRect/MarginContainer/TabContainer/Audio/MasterVolumeSlider" to="TextureRect/MarginContainer/TabContainer/Audio" method="_on_master_volume_slider_value_changed"]
+[connection signal="value_changed" from="TextureRect/MarginContainer/TabContainer/Audio/MusicVolumeSlider" to="TextureRect/MarginContainer/TabContainer/Audio" method="_on_music_volume_slider_value_changed"]
+[connection signal="value_changed" from="TextureRect/MarginContainer/TabContainer/Audio/EffectVolumeSlider" to="TextureRect/MarginContainer/TabContainer/Audio" method="_on_effect_volume_slider_value_changed"]
+[connection signal="pressed" from="TextureRect/MarginContainer/TabContainer/Audio/Reset Button" to="TextureRect/MarginContainer/TabContainer/Audio" method="_on_reset_button_pressed"]
+[connection signal="pressed" from="TextureRect/MarginContainer/TabContainer/Audio/GoBack Button" to="." method="_on_go_back_button_pressed"]

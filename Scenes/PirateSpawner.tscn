@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://qs8pjwhiwaod"]
+
+[ext_resource type="Script" path="res://Scripts/PirateSpawner.cs" id="1_v8wre"]
+[ext_resource type="PackedScene" uid="uid://drhnds504co4s" path="res://Scenes/PirateShip.tscn" id="2_t8hck"]
+
+[node name="PirateSpawner" type="Node2D"]
+script = ExtResource("1_v8wre")
+Ship = ExtResource("2_t8hck")

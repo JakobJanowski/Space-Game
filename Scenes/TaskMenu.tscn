@@ -1,0 +1,420 @@
+[gd_scene load_steps=17 format=3 uid="uid://cjaurbvl7ehmm"]
+
+[ext_resource type="Theme" uid="uid://dv4gowu72r2tu" path="res://Themes/TaskMenuTheme.tres" id="1_02g7k"]
+[ext_resource type="Script" path="res://Scripts/TaskMenu.cs" id="1_u6f18"]
+[ext_resource type="Texture2D" uid="uid://du0eoorvykph4" path="res://Sprites/ShipBluePrint.png" id="3_7i5my"]
+[ext_resource type="Texture2D" uid="uid://dn3dtu4jr6kg3" path="res://Sprites/LostCargoIcon.png" id="3_eydhe"]
+[ext_resource type="Texture2D" uid="uid://bnpo2v33y5aj" path="res://icon.svg" id="3_h5fuv"]
+[ext_resource type="Texture2D" uid="uid://djmh2fjv1ybva" path="res://Sprites/DeafeatHostiles.png" id="4_r2qg0"]
+[ext_resource type="Script" path="res://Scripts/MapContainer.cs" id="5_nodmc"]
+[ext_resource type="Texture2D" uid="uid://cqi2gisvpdah4" path="res://Sprites/ExterminateNest.png" id="5_sm4sw"]
+[ext_resource type="Texture2D" uid="uid://q0ane1cgjp6l" path="res://Sprites/MapBG.png" id="6_12ase"]
+[ext_resource type="Texture2D" uid="uid://d3x5844bi5grw" path="res://Sprites/PlayerMapIcon.png" id="7_le5jd"]
+[ext_resource type="Texture2D" uid="uid://bhdlvmipf4gay" path="res://Sprites/EnemySpawner.png" id="10_1j5mr"]
+[ext_resource type="AudioStream" uid="uid://bsr4okljbxvy" path="res://Audio/SFX/711795__plasma4__click-sound.mp3" id="12_os3wf"]
+[ext_resource type="AudioStream" uid="uid://da4xwqlp1qfxc" path="res://Audio/SFX/Boing.wav" id="13_x1wjx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0lhmn"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xbhgb"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hbif5"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="TaskMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_u6f18")
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer2"]
+self_modulate = Color(0.501961, 0.501961, 0.501961, 0.678431)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0lhmn")
+
+[node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer2/PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer2/PanelContainer/VSplitContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+
+[node name="MissionButton" type="Button" parent="MarginContainer2/PanelContainer/VSplitContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_02g7k")
+text = "Missions"
+
+[node name="UpgradesButton" type="Button" parent="MarginContainer2/PanelContainer/VSplitContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_02g7k")
+text = "Upgrades"
+
+[node name="MapButton" type="Button" parent="MarginContainer2/PanelContainer/VSplitContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme = ExtResource("1_02g7k")
+text = "Map"
+
+[node name="MissionContainer" type="MarginContainer" parent="MarginContainer2/PanelContainer/VSplitContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
+
+[node name="TaskList" type="ItemList" parent="MarginContainer2/PanelContainer/VSplitContainer/MissionContainer"]
+layout_mode = 2
+theme = ExtResource("1_02g7k")
+item_count = 3
+item_0/text = "Recover Lost Cargo - $200 Reward"
+item_0/icon = ExtResource("3_eydhe")
+item_1/text = "Defeat Hostiles - $300 Reward"
+item_1/icon = ExtResource("4_r2qg0")
+item_2/text = "Exterminate Nest - $400 Reward"
+item_2/icon = ExtResource("5_sm4sw")
+
+[node name="TaskDes" type="Panel" parent="MarginContainer2/PanelContainer/VSplitContainer/MissionContainer"]
+visible = false
+layout_mode = 2
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer2/PanelContainer/VSplitContainer/MissionContainer/TaskDes"]
+layout_mode = 0
+offset_right = 1029.0
+offset_bottom = 463.0
+
+[node name="TaskIcon" type="TextureRect" parent="MarginContainer2/PanelContainer/VSplitContainer/MissionContainer/TaskDes/HSplitContainer"]
+layout_mode = 2
+texture = ExtResource("3_h5fuv")
+stretch_mode = 2
+
+[node name="TaskDesLabel" type="RichTextLabel" parent="MarginContainer2/PanelContainer/VSplitContainer/MissionContainer/TaskDes/HSplitContainer"]
+layout_mode = 2
+theme = ExtResource("1_02g7k")
+text = "Debug Objectives"
+
+[node name="UpgradeContainer" type="MarginContainer" parent="MarginContainer2/PanelContainer/VSplitContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer"]
+layout_mode = 2
+
+[node name="ShipImageContainer" type="MarginContainer" parent="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer/ShipImageContainer"]
+self_modulate = Color(1, 1, 1, 0.862745)
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("3_7i5my")
+expand_mode = 3
+
+[node name="Gun1Button" type="Button" parent="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer/ShipImageContainer/TextureRect"]
+texture_filter = 1
+layout_mode = 2
+anchor_left = 0.153
+anchor_top = 0.097
+anchor_right = 0.37
+anchor_bottom = 0.153
+offset_left = 2.28249
+offset_top = -0.105
+offset_right = -0.0750122
+offset_bottom = -0.145004
+theme = ExtResource("1_02g7k")
+theme_override_styles/normal = SubResource("StyleBoxFlat_xbhgb")
+text = "Gun1"
+
+[node name="Gun4Button" type="Button" parent="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer/ShipImageContainer/TextureRect"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.551
+anchor_top = 0.83
+anchor_right = 0.77
+anchor_bottom = 0.895
+offset_left = -0.32251
+offset_top = 0.0499878
+offset_right = -0.0750122
+offset_bottom = -0.175018
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_02g7k")
+theme_override_styles/normal = SubResource("StyleBoxFlat_hbif5")
+text = "Gun 4"
+
+[node name="Gun3Button" type="Button" parent="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer/ShipImageContainer/TextureRect"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.146
+anchor_top = 0.83
+anchor_right = 0.36
+anchor_bottom = 0.89
+offset_left = 0.164993
+offset_top = 0.0499878
+offset_right = -0.100006
+offset_bottom = 0.149994
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_02g7k")
+theme_override_styles/normal = SubResource("StyleBoxFlat_xbhgb")
+text = "Gun 3"
+
+[node name="Gun2Button" type="Button" parent="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer/ShipImageContainer/TextureRect"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.459
+anchor_top = 0.097
+anchor_right = 0.674
+anchor_bottom = 0.153
+offset_left = -0.152527
+offset_top = -0.105
+offset_right = -0.115021
+offset_bottom = -0.145004
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_02g7k")
+theme_override_styles/normal = SubResource("StyleBoxFlat_xbhgb")
+text = "Gun2
+"
+
+[node name="Control Container" type="MarginContainer" parent="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer/Control Container"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="UpgradeTitle" type="Label" parent="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer/Control Container/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_02g7k")
+text = "Upgrades"
+horizontal_alignment = 1
+
+[node name="StrengthButton" type="Button" parent="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer/Control Container/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "The amount of Damage each hit deals
+Upgrade Cost: $50"
+theme = ExtResource("1_02g7k")
+text = "Strength: 1/5"
+
+[node name="FireSpeedButton" type="Button" parent="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer/Control Container/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "How quickly the gun fires
+Upgrade Cost: $50"
+theme = ExtResource("1_02g7k")
+text = "Shot Speed: 1/5"
+
+[node name="ShotsButton" type="Button" parent="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer/Control Container/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "How many shots are fired each volley
+Upgrade Cost: $50"
+theme = ExtResource("1_02g7k")
+text = "Shots: 1/5"
+
+[node name="TypeTitleLabel" type="Label" parent="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer/Control Container/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_02g7k")
+text = "Weapon Type"
+horizontal_alignment = 1
+
+[node name="TypeLabel" type="Label" parent="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer/Control Container/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_02g7k")
+text = "Railgun"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer/Control Container/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_02g7k")
+text = "Change Weapon Type"
+horizontal_alignment = 1
+
+[node name="RailgunButton" type="Button" parent="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer/Control Container/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "A medium powered Railgun
+Average Damage
+Good Reload Speed
+Swap Cost: $100"
+theme = ExtResource("1_02g7k")
+text = "Railgun"
+
+[node name="LaserButton" type="Button" parent="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer/Control Container/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "A low powered Laser
+Low Damage
+Good Reload Speed
+Highly Accurate
+Swap Cost: $100"
+theme = ExtResource("1_02g7k")
+text = "Laser"
+
+[node name="MissleButton" type="Button" parent="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer/Control Container/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "A high powered missle launcher
+High Damage
+Slow Reload Speed
+Swap Cost: $100"
+theme = ExtResource("1_02g7k")
+text = "Missle Launcher"
+
+[node name="RepairLabel" type="Label" parent="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer/Control Container/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_02g7k")
+text = "Repair Ship"
+horizontal_alignment = 1
+
+[node name="RepairShip" type="Button" parent="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer/Control Container/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Repair 10% Ship Integrity
+Cost: $200"
+theme = ExtResource("1_02g7k")
+text = "10% Repair"
+
+[node name="MapContainer" type="MarginContainer" parent="MarginContainer2/PanelContainer/VSplitContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
+script = ExtResource("5_nodmc")
+
+[node name="Panel" type="Panel" parent="MarginContainer2/PanelContainer/VSplitContainer/MapContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/PanelContainer/VSplitContainer/MapContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Panel2" type="Panel" parent="MarginContainer2/PanelContainer/VSplitContainer/MapContainer/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer2/PanelContainer/VSplitContainer/MapContainer/Panel/HBoxContainer/Panel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_02g7k")
+text = "XX Nebula Map
+
+An as of yet uninhabited area of space, regardless quite a lot of ships pass through the area which means the galactic government offers plenty of work to “settle” the area.
+
+It was once theorised that the different colours of the nebula correspond the density of wildlife, that has since been disproved, however.
+
+
+"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2/PanelContainer/VSplitContainer/MapContainer/Panel/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("6_12ase")
+expand_mode = 2
+
+[node name="Player" type="TextureRect" parent="MarginContainer2/PanelContainer/VSplitContainer/MapContainer/Panel/HBoxContainer/TextureRect"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.024
+anchor_top = 0.043
+anchor_right = 0.024
+anchor_bottom = 0.043
+offset_left = -15.16
+offset_top = -14.995
+offset_right = 14.84
+offset_bottom = 15.005
+pivot_offset = Vector2(15, 15)
+texture = ExtResource("7_le5jd")
+stretch_mode = 3
+
+[node name="Panel" type="Panel" parent="MarginContainer2/PanelContainer/VSplitContainer/MapContainer/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2/PanelContainer/VSplitContainer/MapContainer/Panel/HBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="MarginContainer2/PanelContainer/VSplitContainer/MapContainer/Panel/HBoxContainer/Panel/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_02g7k")
+text = "A Guide"
+
+[node name="ItemList" type="ItemList" parent="MarginContainer2/PanelContainer/VSplitContainer/MapContainer/Panel/HBoxContainer/Panel/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+item_count = 2
+fixed_icon_size = Vector2i(50, 50)
+item_0/text = "Our Current Posistion"
+item_0/icon = ExtResource("7_le5jd")
+item_1/text = "Known Monster Nests"
+item_1/icon = ExtResource("10_1j5mr")
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_os3wf")
+bus = &"SFX"
+
+[node name="Boing" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_x1wjx")
+bus = &"SFX"
+
+[connection signal="pressed" from="MarginContainer2/PanelContainer/VSplitContainer/MarginContainer2/MissionButton" to="." method="_on_mission_button_pressed"]
+[connection signal="pressed" from="MarginContainer2/PanelContainer/VSplitContainer/MarginContainer2/UpgradesButton" to="." method="_on_upgrades_button_pressed"]
+[connection signal="pressed" from="MarginContainer2/PanelContainer/VSplitContainer/MarginContainer2/MapButton" to="." method="_on_map_button_pressed"]
+[connection signal="item_activated" from="MarginContainer2/PanelContainer/VSplitContainer/MissionContainer/TaskList" to="." method="_on_item_list_item_activated"]
+[connection signal="pressed" from="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer/ShipImageContainer/TextureRect/Gun1Button" to="." method="_on_gun_1_button_pressed"]
+[connection signal="pressed" from="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer/ShipImageContainer/TextureRect/Gun4Button" to="." method="_on_gun_4_button_pressed"]
+[connection signal="pressed" from="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer/ShipImageContainer/TextureRect/Gun3Button" to="." method="_on_gun_3_button_pressed"]
+[connection signal="pressed" from="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer/ShipImageContainer/TextureRect/Gun2Button" to="." method="_on_gun_2_button_pressed"]
+[connection signal="pressed" from="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer/Control Container/VBoxContainer/StrengthButton" to="." method="_on_strength_button_pressed"]
+[connection signal="pressed" from="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer/Control Container/VBoxContainer/FireSpeedButton" to="." method="_on_fire_speed_button_pressed"]
+[connection signal="pressed" from="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer/Control Container/VBoxContainer/ShotsButton" to="." method="_on_shots_button_pressed"]
+[connection signal="pressed" from="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer/Control Container/VBoxContainer/RailgunButton" to="." method="_on_railgun_button_pressed"]
+[connection signal="pressed" from="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer/Control Container/VBoxContainer/LaserButton" to="." method="_on_laser_button_pressed"]
+[connection signal="pressed" from="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer/Control Container/VBoxContainer/MissleButton" to="." method="_on_missle_button_pressed"]
+[connection signal="pressed" from="MarginContainer2/PanelContainer/VSplitContainer/UpgradeContainer/HSplitContainer/Control Container/VBoxContainer/RepairShip" to="." method="_on_repair_ship_pressed"]

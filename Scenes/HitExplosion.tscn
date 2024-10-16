@@ -1,0 +1,88 @@
+[gd_scene load_steps=13 format=3 uid="uid://1pbycdwo26wy"]
+
+[ext_resource type="Texture2D" uid="uid://cxyy2pdeyevd" path="res://Sprites/JoyStick.png" id="1_uujnt"]
+[ext_resource type="Script" path="res://Scripts/RockExplosion.cs" id="2_oln84"]
+
+[sub_resource type="Gradient" id="Gradient_73jij"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8yxpu"]
+gradient = SubResource("Gradient_73jij")
+
+[sub_resource type="Curve" id="Curve_ojo33"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_g75wh"]
+curve = SubResource("Curve_ojo33")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_egcrb"]
+emission_shape = 1
+emission_sphere_radius = 15.0
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 25.0
+initial_velocity_max = 30.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 2.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_g75wh")
+color = Color(0.298039, 0.298039, 0.298039, 1)
+color_ramp = SubResource("GradientTexture1D_8yxpu")
+sub_emitter_mode = 1
+sub_emitter_frequency = 4.0
+
+[sub_resource type="Gradient" id="Gradient_jktcd"]
+offsets = PackedFloat32Array(0, 0.0070922, 0.141844, 0.631206, 0.737589)
+colors = PackedColorArray(0.652227, 2.76752e-06, 4.33177e-07, 1, 0.95, 1, 0, 1, 1, 0.916667, 0, 1, 0.728325, 0.372247, 0, 1, 0.481273, 1.09497e-06, 2.40654e-07, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0434t"]
+gradient = SubResource("Gradient_jktcd")
+
+[sub_resource type="Curve" id="Curve_iwrxd"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.01755, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_nko8s"]
+curve = SubResource("Curve_iwrxd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6cthb"]
+emission_shape = 1
+emission_sphere_radius = 25.0
+particle_flag_disable_z = true
+direction = Vector3(1, 1, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 30.0
+initial_velocity_max = 45.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.25
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_nko8s")
+color_ramp = SubResource("GradientTexture1D_0434t")
+
+[node name="RockExplosion" type="GPUParticles2D"]
+texture_filter = 1
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_egcrb")
+texture = ExtResource("1_uujnt")
+lifetime = 0.75
+explosiveness = 1.0
+script = ExtResource("2_oln84")
+
+[node name="EX1" type="GPUParticles2D" parent="."]
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_6cthb")
+texture = ExtResource("1_uujnt")
+lifetime = 0.75
+explosiveness = 1.0
+randomness = 1.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

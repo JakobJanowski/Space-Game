@@ -1,0 +1,222 @@
+[gd_scene load_steps=8 format=3 uid="uid://ct1eesue5jyin"]
+
+[ext_resource type="Theme" uid="uid://dv4gowu72r2tu" path="res://Themes/TaskMenuTheme.tres" id="1_dpkn4"]
+[ext_resource type="Script" path="res://Scripts/EngineUI.cs" id="1_npiff"]
+[ext_resource type="Texture2D" uid="uid://ce36qbo2ukyxw" path="res://Sprites/ShieldBg.png" id="2_wxv4x"]
+[ext_resource type="Texture2D" uid="uid://ev8hyeldmowi" path="res://Sprites/EngineBox.png" id="4_xbtyb"]
+[ext_resource type="AudioStream" uid="uid://bsr4okljbxvy" path="res://Audio/SFX/711795__plasma4__click-sound.mp3" id="5_aktei"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1rnfj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qunb8"]
+size = Vector2(200, 195)
+
+[node name="EngineUI" type="Node2D"]
+script = ExtResource("1_npiff")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_top = 75
+theme_override_constants/margin_right = 75
+theme_override_constants/margin_bottom = 75
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+
+[node name="HSplitContainer" type="HSplitContainer" parent="CanvasLayer/MarginContainer/Panel"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer/Panel/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/Panel/HSplitContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_dpkn4")
+theme_override_font_sizes/font_size = 32
+text = "Power Settings"
+
+[node name="PowerLabel" type="Label" parent="CanvasLayer/MarginContainer/Panel/HSplitContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_dpkn4")
+theme_override_font_sizes/font_size = 32
+text = "Power: 100%"
+
+[node name="Label3" type="Label" parent="CanvasLayer/MarginContainer/Panel/HSplitContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_dpkn4")
+theme_override_font_sizes/font_size = 32
+text = "Weapon !"
+
+[node name="Weapon1Slider" type="HSlider" parent="CanvasLayer/MarginContainer/Panel/HSplitContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_dpkn4")
+min_value = 1.0
+max_value = 5.0
+value = 1.0
+
+[node name="Label4" type="Label" parent="CanvasLayer/MarginContainer/Panel/HSplitContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_dpkn4")
+theme_override_font_sizes/font_size = 32
+text = "Weapon 2"
+
+[node name="Weapon2Slider" type="HSlider" parent="CanvasLayer/MarginContainer/Panel/HSplitContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_dpkn4")
+min_value = 1.0
+max_value = 5.0
+value = 1.0
+
+[node name="Label5" type="Label" parent="CanvasLayer/MarginContainer/Panel/HSplitContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_dpkn4")
+theme_override_font_sizes/font_size = 32
+text = "Weapon 3"
+
+[node name="Weapon3Slider" type="HSlider" parent="CanvasLayer/MarginContainer/Panel/HSplitContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_dpkn4")
+min_value = 1.0
+max_value = 5.0
+value = 1.0
+
+[node name="Label6" type="Label" parent="CanvasLayer/MarginContainer/Panel/HSplitContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_dpkn4")
+theme_override_font_sizes/font_size = 32
+text = "Weapon 4"
+
+[node name="Weapon4Slider" type="HSlider" parent="CanvasLayer/MarginContainer/Panel/HSplitContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_dpkn4")
+min_value = 1.0
+max_value = 5.0
+value = 1.0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Panel/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer/Panel/HSplitContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_dpkn4")
+text = "Shield Control"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MarginContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("2_wxv4x")
+expand_mode = 4
+stretch_mode = 6
+
+[node name="TopButton" type="Button" parent="CanvasLayer/MarginContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer/TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.339
+anchor_top = 0.006
+anchor_right = 0.663
+anchor_bottom = 0.334
+offset_left = 0.194992
+offset_top = 0.072
+offset_right = -0.185028
+offset_bottom = 0.00799561
+pivot_offset = Vector2(80, 80)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1rnfj")
+
+[node name="CenterButton" type="Button" parent="CanvasLayer/MarginContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer/TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.337
+anchor_top = 0.352
+anchor_right = 0.661
+anchor_bottom = 0.67
+offset_left = 0.184998
+offset_top = 0.223984
+offset_right = -0.195007
+offset_bottom = 0.039978
+pivot_offset = Vector2(80, 80)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1rnfj")
+
+[node name="RightButton" type="Button" parent="CanvasLayer/MarginContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer/TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.677
+anchor_top = 0.348
+anchor_right = 1.0
+anchor_bottom = 0.676
+offset_left = -0.115021
+offset_top = 0.175995
+offset_bottom = 0.111969
+pivot_offset = Vector2(80, 80)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1rnfj")
+
+[node name="LeftButton" type="Button" parent="CanvasLayer/MarginContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer/TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.343
+anchor_right = 0.321
+anchor_bottom = 0.676
+offset_left = -1.0
+offset_top = 0.214981
+offset_right = 0.104996
+offset_bottom = -2.32404
+pivot_offset = Vector2(80, 80)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1rnfj")
+
+[node name="DownButton" type="Button" parent="CanvasLayer/MarginContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer/TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.339
+anchor_top = 0.673
+anchor_right = 0.663
+anchor_bottom = 1.0
+offset_left = 0.194992
+offset_top = -0.13501
+offset_right = -0.185028
+offset_bottom = 0.29599
+pivot_offset = Vector2(80, 80)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1rnfj")
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(0.35, 0.35)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_qunb8")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+texture_filter = 1
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_xbtyb")
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_aktei")
+bus = &"SFX"
+
+[connection signal="value_changed" from="CanvasLayer/MarginContainer/Panel/HSplitContainer/VBoxContainer/Weapon1Slider" to="." method="_on_weapon_1_slider_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/MarginContainer/Panel/HSplitContainer/VBoxContainer/Weapon2Slider" to="." method="_on_weapon_2_slider_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/MarginContainer/Panel/HSplitContainer/VBoxContainer/Weapon3Slider" to="." method="_on_weapon_3_slider_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/MarginContainer/Panel/HSplitContainer/VBoxContainer/Weapon4Slider" to="." method="_on_weapon_4_slider_value_changed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer/TextureRect/TopButton" to="." method="_on_top_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer/TextureRect/CenterButton" to="." method="_on_center_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer/TextureRect/RightButton" to="." method="_on_right_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer/TextureRect/LeftButton" to="." method="_on_left_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer/TextureRect/DownButton" to="." method="_on_down_button_pressed"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

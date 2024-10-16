@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://bmwkunjfcgnyu"]
+
+[ext_resource type="Script" path="res://Scripts/EnemySpawner.cs" id="1_laj5h"]
+[ext_resource type="PackedScene" uid="uid://2wffw8ptlyly" path="res://Scenes/EvilSpaceFish.tscn" id="2_hwsvb"]
+[ext_resource type="Script" path="res://Scripts/EnemySpawnRigidBody.cs" id="3_0uk3e"]
+[ext_resource type="Texture2D" uid="uid://bhdlvmipf4gay" path="res://Sprites/EnemySpawner.png" id="4_lpj0v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c1bc4"]
+
+[node name="EnemySpawner" type="Node2D" groups=["EnemySpawn"]]
+script = ExtResource("1_laj5h")
+EvilSpaceFish = ExtResource("2_hwsvb")
+
+[node name="RigidBody2D" type="StaticBody2D" parent="." groups=["EnemySpawn"]]
+collision_layer = 32
+collision_mask = 6
+script = ExtResource("3_0uk3e")
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = ExtResource("4_lpj0v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+scale = Vector2(3, 3)
+shape = SubResource("CircleShape2D_c1bc4")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

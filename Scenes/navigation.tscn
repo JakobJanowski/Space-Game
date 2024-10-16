@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bho88vssry326"]
+
+[ext_resource type="Script" path="res://Scripts/ToggleSpaceship.cs" id="1_1rggv"]
+[ext_resource type="PackedScene" uid="uid://b7lpxbco4pi40" path="res://Scenes/InfoPopUp.tscn" id="2_3wxm0"]
+[ext_resource type="Texture2D" uid="uid://c77csce50lkfj" path="res://Sprites/console_w.png" id="3_3jhgt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cbhv1"]
+size = Vector2(91, 74)
+
+[node name="Navigation" type="Area2D"]
+collision_layer = 2
+script = ExtResource("1_1rggv")
+UiText = ExtResource("2_3wxm0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(196, 150)
+texture = ExtResource("3_3jhgt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(183.5, 154)
+shape = SubResource("RectangleShape2D_cbhv1")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

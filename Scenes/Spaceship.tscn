@@ -1,0 +1,262 @@
+[gd_scene load_steps=26 format=3 uid="uid://ddp426u5t2xkn"]
+
+[ext_resource type="Script" path="res://Scripts/Spaceship.cs" id="1_3pl6t"]
+[ext_resource type="Texture2D" uid="uid://duw8scssl3cp2" path="res://Sprites/Testship.png" id="1_xgvyj"]
+[ext_resource type="Texture2D" uid="uid://dboq8ggxsqr0g" path="res://Sprites/Testship-Moving.png" id="2_u3vwk"]
+[ext_resource type="Texture2D" uid="uid://dbccpshosrq1y" path="res://Sprites/Testship-Middle.png" id="3_3460i"]
+[ext_resource type="PackedScene" uid="uid://bho88vssry326" path="res://Scenes/navigation.tscn" id="3_kdlb2"]
+[ext_resource type="PackedScene" uid="uid://difgt5kw7hqh8" path="res://Scenes/weapons_control.tscn" id="4_o1evp"]
+[ext_resource type="Texture2D" uid="uid://cyxc2tyyfnrat" path="res://Sprites/Testship-Spin1.png" id="5_iault"]
+[ext_resource type="Script" path="res://Scripts/InnerShield.cs" id="6_ewqa6"]
+[ext_resource type="Texture2D" uid="uid://dok3s6dsyvnib" path="res://Sprites/Testship-Spin2.png" id="6_o0rae"]
+[ext_resource type="PackedScene" uid="uid://ch2guwuajldky" path="res://Scenes/Laser-Turet.tscn" id="6_pf2ah"]
+[ext_resource type="PackedScene" uid="uid://dbj0fifhl72ep" path="res://Scenes/WeaponBase.tscn" id="6_q874s"]
+[ext_resource type="PackedScene" uid="uid://ct1eesue5jyin" path="res://Scenes/EngineUI.tscn" id="7_2ptmm"]
+[ext_resource type="PackedScene" uid="uid://qbymd8ggkx2u" path="res://Scenes/PlayerShield.tscn" id="7_r6s6u"]
+[ext_resource type="PackedScene" uid="uid://bvcupfrcctlsc" path="res://Scenes/PlayerShieldRound.tscn" id="8_crmvw"]
+[ext_resource type="Texture2D" uid="uid://caorelln3y5n5" path="res://Sprites/Pipes.png" id="11_n0rwh"]
+[ext_resource type="AudioStream" uid="uid://cm01lf6kwbyui" path="res://Audio/SFX/725828__cliftonmcarlson__spaceship-engine-bass.mp3" id="16_lfdge"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6if6h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_u3vwk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_3460i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_xgvyj")
+}],
+"loop": false,
+"name": &"Move-Stop",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_u3vwk")
+}],
+"loop": true,
+"name": &"Moving",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_iault")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_iault")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_iault")
+}],
+"loop": false,
+"name": &"Spin1",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_o0rae")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_o0rae")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_o0rae")
+}],
+"loop": false,
+"name": &"Spin2",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_xgvyj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_3460i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_u3vwk")
+}],
+"loop": false,
+"name": &"Stop-Move",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_xgvyj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_82yhb"]
+size = Vector2(392, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6vjcg"]
+size = Vector2(22, 75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o1p0o"]
+size = Vector2(139, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lbyki"]
+size = Vector2(17.2, 188)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_au8p6"]
+size = Vector2(612, 19)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rmdup"]
+size = Vector2(79.8, 19)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gwwmf"]
+radius = 149.0
+height = 676.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_26xr4"]
+size = Vector2(15, 44.5)
+
+[node name="Shapeship" type="CharacterBody2D" groups=["SpaceShip"]]
+collision_layer = 2
+collision_mask = 52
+motion_mode = 1
+script = ExtResource("1_3pl6t")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(29.175, -7.99998)
+scale = Vector2(2.17188, 2.17188)
+sprite_frames = SubResource("SpriteFrames_6if6h")
+animation = &"Stop-Move"
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+position = Vector2(-205.2, -158)
+polygon = PackedVector2Array(334, 198, -77, 207, -82, 113, -66, 112, -65, 194, 333, 188)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-16.2, -149.5)
+shape = SubResource("RectangleShape2D_82yhb")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-204.2, -118.5)
+shape = SubResource("RectangleShape2D_6vjcg")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(-264.7, -88)
+shape = SubResource("RectangleShape2D_o1p0o")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+position = Vector2(-335.6, 4)
+shape = SubResource("RectangleShape2D_lbyki")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="."]
+position = Vector2(24.8, 121.5)
+shape = SubResource("RectangleShape2D_au8p6")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="."]
+position = Vector2(-304.1, 102.5)
+shape = SubResource("RectangleShape2D_rmdup")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-205.2, -158)
+ignore_rotation = false
+zoom = Vector2(0.5, 0.5)
+
+[node name="Navigation" parent="." instance=ExtResource("3_kdlb2")]
+position = Vector2(35, -241)
+
+[node name="WeaponsControl" parent="." instance=ExtResource("4_o1evp")]
+texture_filter = 1
+position = Vector2(-97, -340)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-205.2, -158)
+polygon = PackedVector2Array(376, 66, 391, 67, 390, 52, 465, 50, 472, 111, 378, 108, 378, 151, 394, 151, 390, 116, 512, 118, 515, 183, 384, 177, 384, 195, 517, 195, 521, 270, 537, 270, 527, 109, 486, 109, 482, 43, 389, 43, 389, 2, 373, 2)
+
+[node name="WeaponsControl2" parent="." instance=ExtResource("4_o1evp")]
+texture_filter = 1
+position = Vector2(130, -340)
+count = 2
+
+[node name="WeaponsControl3" parent="." instance=ExtResource("4_o1evp")]
+position = Vector2(-101, -149)
+count = 3
+
+[node name="WeaponsControl4" parent="." instance=ExtResource("4_o1evp")]
+position = Vector2(298, -159)
+count = 4
+
+[node name="EngineUI" parent="." instance=ExtResource("7_2ptmm")]
+position = Vector2(-234, -4)
+
+[node name="InnerShield" type="StaticBody2D" parent="." groups=["Shield"]]
+position = Vector2(-205.2, -158)
+collision_layer = 8
+collision_mask = 20
+script = ExtResource("6_ewqa6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InnerShield"]
+position = Vector2(204.2, 147)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_gwwmf")
+
+[node name="Shield1" parent="." instance=ExtResource("7_r6s6u")]
+visible = false
+
+[node name="Shield2" parent="." instance=ExtResource("7_r6s6u")]
+visible = false
+position = Vector2(10, 195)
+
+[node name="Shield3" parent="." instance=ExtResource("8_crmvw")]
+visible = false
+position = Vector2(-208, -85)
+rotation = 3.14159
+scale = Vector2(2.5, 2.5)
+
+[node name="Shield4" parent="." instance=ExtResource("8_crmvw")]
+visible = false
+position = Vector2(213, 75)
+scale = Vector2(2.5, 2.5)
+
+[node name="Weapon1" parent="." groups=["Weapons"] instance=ExtResource("6_pf2ah")]
+position = Vector2(-138, -198)
+
+[node name="Weapon2" parent="." groups=["Weapons"] instance=ExtResource("6_q874s")]
+position = Vector2(127, -194)
+
+[node name="Weapon3" parent="." groups=["Weapons"] instance=ExtResource("6_q874s")]
+position = Vector2(-140, 169)
+rotation = 1.5708
+
+[node name="Weapon4" parent="." groups=["Weapons"] instance=ExtResource("6_q874s")]
+position = Vector2(139, 166)
+rotation = 1.5708
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="."]
+position = Vector2(182, 13.75)
+shape = SubResource("RectangleShape2D_26xr4")
+
+[node name="Pipes1" type="Sprite2D" parent="."]
+z_index = 1
+texture_filter = 1
+position = Vector2(-305.5, -36.5)
+scale = Vector2(1.125, 1.43333)
+texture = ExtResource("11_n0rwh")
+
+[node name="Pipes2" type="Sprite2D" parent="."]
+z_index = 1
+texture_filter = 1
+position = Vector2(-306.649, 32)
+rotation = 3.14159
+scale = Vector2(1.14256, 1.43333)
+texture = ExtResource("11_n0rwh")
+
+[node name="Engine" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-337, 2)
+stream = ExtResource("16_lfdge")
+volume_db = 10.0
+autoplay = true
+bus = &"SFX"
+
+[connection signal="TogglePlayerControl" from="Navigation" to="." method="_on_navigation_toggle_player_control"]

@@ -1,0 +1,115 @@
+[gd_scene load_steps=12 format=3 uid="uid://2wffw8ptlyly"]
+
+[ext_resource type="Script" path="res://Scripts/EvilSpaceFish.cs" id="1_bvr17"]
+[ext_resource type="Texture2D" uid="uid://3jxxqnf7less" path="res://Sprites/EvilSpaceShip.png" id="1_n0gla"]
+[ext_resource type="Texture2D" uid="uid://bp1kbpviyt74m" path="res://Sprites/EvilSpaceShip-Bite.png" id="3_72lg6"]
+[ext_resource type="Texture2D" uid="uid://dfovao03fmsgu" path="res://Sprites/EvilSpaceShip-Closed.png" id="4_5fmct"]
+[ext_resource type="Texture2D" uid="uid://buaplalqjo25s" path="res://Sprites/EvilSpaceShip-Flap1.png" id="5_e0jgx"]
+[ext_resource type="Texture2D" uid="uid://cp1h3nptjju51" path="res://Sprites/EvilSpaceShip-Flap2.5.png" id="6_uap7j"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g3wyk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_n0gla")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_72lg6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_5fmct")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_n0gla")
+}],
+"loop": false,
+"name": &"Bite",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_n0gla")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_e0jgx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_n0gla")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_uap7j")
+}],
+"loop": true,
+"name": &"Moving",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_n0gla")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mlmlj"]
+radius = 555.757
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3ip3w"]
+radius = 8.0
+height = 34.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3sywj"]
+radius = 15.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6xlvg"]
+size = Vector2(56, 18)
+
+[node name="EvilSpaceFish" type="CharacterBody2D" groups=["Enemy"]]
+collision_layer = 16
+collision_mask = 30
+script = ExtResource("1_bvr17")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_g3wyk")
+animation = &"Bite"
+frame = 3
+frame_progress = 1.0
+flip_h = true
+
+[node name="DetectionRadius" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRadius"]
+shape = SubResource("CircleShape2D_mlmlj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 2)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_3ip3w")
+
+[node name="NibbleRadius" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 14
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NibbleRadius"]
+position = Vector2(14, 1)
+shape = SubResource("CapsuleShape2D_3sywj")
+
+[node name="NibbleAnimationRadius" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 14
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NibbleAnimationRadius"]
+position = Vector2(32, 2)
+shape = SubResource("RectangleShape2D_6xlvg")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="DetectionRadius" to="." method="_on_detection_radius_body_entered"]
+[connection signal="body_exited" from="DetectionRadius" to="." method="_on_detection_radius_body_exited"]
+[connection signal="body_entered" from="NibbleRadius" to="." method="_on_nibble_radius_body_entered"]
+[connection signal="body_entered" from="NibbleAnimationRadius" to="." method="_on_nibble_animation_radius_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

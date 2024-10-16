@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://qbymd8ggkx2u"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerShield.cs" id="1_s1grn"]
+[ext_resource type="Texture2D" uid="uid://couh4j16c7hua" path="res://Sprites/Basic Shield.png" id="2_wmu4u"]
+[ext_resource type="AudioStream" uid="uid://bpr5mq40lp02s" path="res://Audio/SFX/609025__colorscrimsontears__power-down-2-rpg.wav" id="3_n16fm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ilqt"]
+size = Vector2(733, 73)
+
+[node name="Shield1" type="StaticBody2D" groups=["Shield"]]
+position = Vector2(1, -173)
+disable_mode = 2
+collision_layer = 8
+collision_mask = 20
+script = ExtResource("1_s1grn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.294118)
+texture_filter = 1
+position = Vector2(-6.5, -31.5)
+scale = Vector2(14.62, 4.6)
+texture = ExtResource("2_wmu4u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-7, -30)
+shape = SubResource("RectangleShape2D_6ilqt")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Break" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_n16fm")
+bus = &"SFX"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

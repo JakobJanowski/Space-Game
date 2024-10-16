@@ -1,0 +1,430 @@
+[gd_scene load_steps=11 format=3 uid="uid://4fb2fdlexfdo"]
+
+[ext_resource type="Script" path="res://Scripts/MainMenu.cs" id="1_e1511"]
+[ext_resource type="FontFile" uid="uid://6r8fvo3fr8vw" path="res://Fonts/Retrocompute.ttf" id="2_oi8lg"]
+[ext_resource type="Texture2D" uid="uid://dmnmj7u2ts7yf" path="res://Sprites/Windows_Screen.png" id="2_waxbn"]
+[ext_resource type="Theme" uid="uid://dnvendquu3hv8" path="res://Themes/TextTheme.tres" id="3_iuekb"]
+[ext_resource type="AudioStream" uid="uid://lm3hwijkytw4" path="res://Audio/Music/Menu Music -607916__buserror__parent-process.mp3" id="5_na7pq"]
+[ext_resource type="AudioStream" uid="uid://bsr4okljbxvy" path="res://Audio/SFX/711795__plasma4__click-sound.mp3" id="6_u8r87"]
+[ext_resource type="PackedScene" uid="uid://bftke10wnpbw3" path="res://Scenes/settings_menu.tscn" id="7_kv8vu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l8eqb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_euhpx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s6b28"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e1511")
+
+[node name="MainMenu" type="PanelContainer" parent="."]
+self_modulate = Color(0.345098, 0.345098, 0.345098, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_l8eqb")
+
+[node name="TextureRect" type="TextureRect" parent="MainMenu"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("2_waxbn")
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMenu"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/margin_left = 115
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 115
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="StartGameButton" type="Button" parent="MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Start a new game"
+theme = ExtResource("3_iuekb")
+theme_override_fonts/font = ExtResource("2_oi8lg")
+text = "Start Game"
+
+[node name="JoinGameButton" type="Button" parent="MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Join a existing game
+Requires IP Address and
+Port number of Host"
+theme = ExtResource("3_iuekb")
+theme_override_fonts/font = ExtResource("2_oi8lg")
+text = "Join Game"
+
+[node name="AddressEntry" type="LineEdit" parent="MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Ip Address of Host"
+theme = ExtResource("3_iuekb")
+theme_override_fonts/font = ExtResource("2_oi8lg")
+placeholder_text = "Address"
+alignment = 1
+
+[node name="PortEntry" type="LineEdit" parent="MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Port the server is running on
+Leave blank for default"
+theme = ExtResource("3_iuekb")
+placeholder_text = "Port Number"
+alignment = 1
+
+[node name="SettingButton" type="Button" parent="MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_iuekb")
+text = "Settings"
+
+[node name="Attributions" type="Button" parent="MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_iuekb")
+text = "Attributions"
+
+[node name="QuitGameButton" type="Button" parent="MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_iuekb")
+theme_override_fonts/font = ExtResource("2_oi8lg")
+text = "Quit Game"
+
+[node name="MarginContainer2" type="MarginContainer" parent="MainMenu"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_top = 150
+
+[node name="Title" type="Label" parent="MainMenu/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource("3_iuekb")
+theme_type_variation = &"HeaderMedium"
+text = "Space Game"
+
+[node name="Start Menu" type="PanelContainer" parent="."]
+visible = false
+self_modulate = Color(0.345098, 0.345098, 0.345098, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_euhpx")
+
+[node name="TextureRect" type="TextureRect" parent="Start Menu"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("2_waxbn")
+
+[node name="LeftMargin" type="MarginContainer" parent="Start Menu"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 115
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 115
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Start Menu/LeftMargin"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="Start Menu/LeftMargin/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_iuekb")
+text = "Launch Sever"
+horizontal_alignment = 1
+
+[node name="PortLabel" type="Label" parent="Start Menu/LeftMargin/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_iuekb")
+text = "Port Number"
+horizontal_alignment = 1
+
+[node name="PortLineEdit" type="LineEdit" parent="Start Menu/LeftMargin/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Enter the Port the server is running on
+Leave blank for default"
+theme = ExtResource("3_iuekb")
+placeholder_text = "Enter Port Number"
+
+[node name="UPnPButton" type="Button" parent="Start Menu/LeftMargin/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Launch a server using UPnP to Automatically open a Port.
+NOTE: Please check your router settings before using this"
+theme = ExtResource("3_iuekb")
+text = "With UPnP"
+
+[node name="WithoutUpnp" type="Button" parent="Start Menu/LeftMargin/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Launch a server on the chosen port
+The port MUST be open for online functionality"
+theme = ExtResource("3_iuekb")
+text = "Without UPNP"
+
+[node name="BackButton" type="Button" parent="Start Menu/LeftMargin"]
+layout_mode = 2
+size_flags_vertical = 8
+tooltip_text = "Return to Main Menu"
+theme = ExtResource("3_iuekb")
+text = "Go Back"
+
+[node name="RightMargin" type="MarginContainer" parent="Start Menu"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 115
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 115
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Start Menu/RightMargin"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="Start Menu/RightMargin/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_iuekb")
+text = "Play Locally"
+horizontal_alignment = 1
+
+[node name="LocalButton" type="Button" parent="Start Menu/RightMargin/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Launch game localy
+Players on the same network will be able
+to connect to this game"
+theme = ExtResource("3_iuekb")
+text = "Local Sever"
+
+[node name="CheckButton" type="CheckButton" parent="Start Menu/RightMargin"]
+layout_mode = 2
+size_flags_vertical = 8
+tooltip_text = "If enabled this session will 
+be able to play on the server"
+theme = ExtResource("3_iuekb")
+button_pressed = true
+text = "Play on this instance"
+
+[node name="Lobby" type="PanelContainer" parent="."]
+visible = false
+self_modulate = Color(0.345098, 0.345098, 0.345098, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_s6b28")
+
+[node name="TextureRect" type="TextureRect" parent="Lobby"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("2_waxbn")
+
+[node name="HSplitContainer" type="HSplitContainer" parent="Lobby"]
+layout_mode = 2
+split_offset = 700
+
+[node name="MarginContainer" type="MarginContainer" parent="Lobby/HSplitContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 115
+theme_override_constants/margin_top = 120
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 115
+
+[node name="PlayerList" type="RichTextLabel" parent="Lobby/HSplitContainer/MarginContainer"]
+layout_mode = 2
+tooltip_text = "List of currently connected players"
+theme = ExtResource("3_iuekb")
+theme_override_font_sizes/normal_font_size = 36
+text = "Players:
+Enter a Name"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Lobby/HSplitContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 115
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Lobby/HSplitContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 50
+
+[node name="LoadWorldButton" type="Button" parent="Lobby/HSplitContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+tooltip_text = "Starts the game
+Only the host may press this"
+theme = ExtResource("3_iuekb")
+text = "Start Game"
+
+[node name="CancelSeverButton" type="Button" parent="Lobby/HSplitContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "Return to Main Menu"
+theme = ExtResource("3_iuekb")
+text = "Go Back"
+
+[node name="NameEdit" type="TextEdit" parent="Lobby/HSplitContainer/MarginContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Enter a name to display to other players"
+theme = ExtResource("3_iuekb")
+placeholder_text = "Name"
+
+[node name="EnterNameButton" type="Button" parent="Lobby/HSplitContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Confirm chosen name"
+theme = ExtResource("3_iuekb")
+text = "Enter Name"
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_na7pq")
+bus = &"Music"
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_u8r87")
+volume_db = 10.0
+bus = &"SFX"
+
+[node name="Settings Menu" parent="." instance=ExtResource("7_kv8vu")]
+visible = false
+layout_mode = 1
+
+[node name="Attributions" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Attributions"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("2_waxbn")
+
+[node name="MarginContainer" type="MarginContainer" parent="Attributions"]
+layout_mode = 2
+theme_override_constants/margin_left = 115
+theme_override_constants/margin_top = 115
+theme_override_constants/margin_right = 115
+theme_override_constants/margin_bottom = 115
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Attributions/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Attributions/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("3_iuekb")
+text = "Attributions"
+horizontal_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Attributions/MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 2
+theme = ExtResource("3_iuekb")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 24
+text = "Sci-Fi Console CC-By-SA 4.0
+https://opengameart.org/content/sci-fi-console-screen
+
+Background Nebula Generated From:
+https://deep-fold.itch.io/space-background-generator
+
+Engine Sprite CC-0
+https://opengameart.org/content/sci-fi-object-set
+
+Settings MenU Background CC-0:
+https://opengameart.org/content/sci-fi-interface-textures-005png-6
+
+Boing Effect CC-0:
+https://freesound.org/people/Greenhourglass/sounds/159376/
+
+Laser effect CC-0:
+https://freesound.org/people/michael_grinnell/sounds/512469/
+
+Big Explosion CC-0:
+https://freesound.org/people/tommccann/sounds/235968/
+
+Small Explosion CC-0:
+https://freesound.org/people/V-ktor/sounds/482992/
+
+Danger Music CC-0:
+https://freesound.org/people/levelclearer/sounds/320780/
+
+BackGround Music 1 CC-0:
+https://freesound.org/people/MusicByMisterbates/sounds/608132/
+
+BackGround Music 2 CC-0:
+https://freesound.org/people/Magmi.Soundtracks/sounds/476556/
+
+Background Music 3 CC-0:
+https://freesound.org/people/ZHR%C3%98/sounds/582032/
+
+Main Menu Music CC-0:
+https://freesound.org/people/BusError/sounds/607916/
+
+Click Effect CC-0:
+https://freesound.org/people/plasma4/sounds/711795/
+
+Small Explosion CC-0:
+https://freesound.org/people/MaoDin204/sounds/721794/
+
+Rock Explosion CC-0:
+https://freesound.org/people/MaoDin204/sounds/721795/
+
+SpaceShip Hum CC-0:
+https://freesound.org/people/cliftonmcarlson/sounds/725828/
+
+Rocket Shoot Effect CC0:
+https://freesound.org/people/Selector/sounds/250200/
+
+Laser Effect CC-0:
+https://freesound.org/people/Glitchedtones/sounds/375922/
+
+Shield Break Effect CC0:
+https://freesound.org/people/colorsCrimsonTears/sounds/609025/
+"
+selection_enabled = true
+
+[node name="GoBackToMeny" type="Button" parent="Attributions/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+tooltip_text = "Return to Main Menu"
+theme = ExtResource("3_iuekb")
+text = "Go Back"
+
+[connection signal="pressed" from="MainMenu/MarginContainer/VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="MainMenu/MarginContainer/VBoxContainer/JoinGameButton" to="." method="_on_join_game_button_pressed"]
+[connection signal="pressed" from="MainMenu/MarginContainer/VBoxContainer/SettingButton" to="." method="_on_setting_button_pressed"]
+[connection signal="pressed" from="MainMenu/MarginContainer/VBoxContainer/Attributions" to="." method="_on_attributions_pressed"]
+[connection signal="pressed" from="MainMenu/MarginContainer/VBoxContainer/QuitGameButton" to="." method="_on_quit_game_button_pressed"]
+[connection signal="pressed" from="Start Menu/LeftMargin/VBoxContainer/UPnPButton" to="." method="_on_u_pn_p_button_pressed"]
+[connection signal="pressed" from="Start Menu/LeftMargin/VBoxContainer/WithoutUpnp" to="." method="_on_without_upnp_pressed"]
+[connection signal="pressed" from="Start Menu/LeftMargin/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="Start Menu/RightMargin/VBoxContainer/LocalButton" to="." method="_on_local_button_pressed"]
+[connection signal="pressed" from="Start Menu/RightMargin/CheckButton" to="." method="_on_check_button_pressed"]
+[connection signal="pressed" from="Lobby/HSplitContainer/MarginContainer2/VBoxContainer/LoadWorldButton" to="." method="_on_load_world_button_pressed"]
+[connection signal="pressed" from="Lobby/HSplitContainer/MarginContainer2/VBoxContainer/CancelSeverButton" to="." method="_on_cancel_sever_button_pressed"]
+[connection signal="pressed" from="Lobby/HSplitContainer/MarginContainer2/VBoxContainer/EnterNameButton" to="." method="_on_enter_name_button_pressed"]
+[connection signal="pressed" from="Attributions/MarginContainer/VBoxContainer/GoBackToMeny" to="." method="_on_go_back_to_meny_pressed"]

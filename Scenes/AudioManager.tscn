@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0ig524csfhlg"]
+
+[ext_resource type="Script" path="res://Scripts/AudioManager.cs" id="1_1mp0c"]
+[ext_resource type="AudioStream" uid="uid://bsr4okljbxvy" path="res://Audio/SFX/711795__plasma4__click-sound.mp3" id="2_rbx7a"]
+[ext_resource type="AudioStream" uid="uid://bdhi8c10njg7w" path="res://Audio/SFX/Pre-Explosion.wav" id="3_033dy"]
+[ext_resource type="AudioStream" uid="uid://dg4o44jmpbn4l" path="res://Audio/SFX/721794__maodin204__8bit-explosion-3.wav" id="3_tt4ry"]
+[ext_resource type="AudioStream" uid="uid://cqwhc0afq0idx" path="res://Audio/SFX/721795__maodin204__8bit-explosion-4.wav" id="4_2pvxl"]
+
+[node name="AudioManager" type="Node2D"]
+script = ExtResource("1_1mp0c")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_rbx7a")
+volume_db = 10.0
+bus = &"SFX"
+
+[node name="FishDeath" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_tt4ry")
+volume_db = 5.0
+bus = &"SFX"
+
+[node name="RockDeath" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_2pvxl")
+bus = &"SFX"
+
+[node name="ShipDeath" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_033dy")
+bus = &"SFX"

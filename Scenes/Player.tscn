@@ -1,0 +1,136 @@
+[gd_scene load_steps=17 format=3 uid="uid://drid337t8lb76"]
+
+[ext_resource type="Script" path="res://Scripts/Playertest2.cs" id="1_j17wy"]
+[ext_resource type="Texture2D" uid="uid://53hfnvpecsky" path="res://Sprites/Untitled.png" id="2_as73u"]
+[ext_resource type="Texture2D" uid="uid://d3sfucflabqw7" path="res://Sprites/Basic Spaceman Forward 2.png" id="3_qfq2m"]
+[ext_resource type="Texture2D" uid="uid://cj0w3bgc14dmm" path="res://Sprites/Basic Spaceman Forward 3.png" id="4_ee1we"]
+[ext_resource type="Texture2D" uid="uid://15xdxarnhq0o" path="res://Sprites/Basic Spaceman Left 1.png" id="5_berj3"]
+[ext_resource type="Texture2D" uid="uid://bjjwoadcy8yij" path="res://Sprites/Basic Spaceman Left 2.png" id="6_0jpxf"]
+[ext_resource type="Texture2D" uid="uid://b4x68au4grv25" path="res://Sprites/Basic Spaceman Right 1.png" id="7_0ck53"]
+[ext_resource type="Texture2D" uid="uid://c1upuk5bl6pe6" path="res://Sprites/Basic Spaceman Left 3.png" id="7_itojh"]
+[ext_resource type="Texture2D" uid="uid://bm2yul2lnfq6q" path="res://Sprites/Basic Spaceman Right 2.png" id="8_62q8q"]
+[ext_resource type="Texture2D" uid="uid://dal0dmruf541w" path="res://Sprites/Basic Spaceman Back 1.png" id="9_3jpdn"]
+[ext_resource type="Texture2D" uid="uid://lqf2jfgtxwc2" path="res://Sprites/Basic Spaceman Right 3.png" id="10_amwsx"]
+[ext_resource type="Texture2D" uid="uid://ciq0ovw066jw3" path="res://Sprites/Basic Spaceman Back 2.png" id="10_c0oy3"]
+[ext_resource type="Texture2D" uid="uid://coo1qjejt7dhq" path="res://Sprites/Basic Spaceman Back 3.png" id="11_3mr8y"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_im7yl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_as73u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_qfq2m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_as73u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ee1we")
+}],
+"loop": true,
+"name": &"Walk Down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_berj3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_0jpxf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_berj3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_itojh")
+}],
+"loop": true,
+"name": &"Walk Left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_0ck53")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_62q8q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_0ck53")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_amwsx")
+}],
+"loop": true,
+"name": &"Walk Right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_3jpdn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_c0oy3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_3jpdn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_3mr8y")
+}],
+"loop": true,
+"name": &"Walk Up",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8eu20"]
+size = Vector2(18, 26.5)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_27si6"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+properties/1/path = NodePath("Sprite:animation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+properties/2/path = NodePath("Sprite:frame")
+properties/2/spawn = true
+properties/2/sync = true
+properties/2/watch = false
+
+[node name="Playertest2" type="CharacterBody2D"]
+collision_mask = 2
+motion_mode = 1
+script = ExtResource("1_j17wy")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_im7yl")
+animation = &"Walk Left"
+frame_progress = 0.0015577
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -0.75)
+shape = SubResource("RectangleShape2D_8eu20")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+ignore_rotation = false
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_27si6")
+
+[node name="Name" type="Label" parent="."]
+offset_left = -17.0
+offset_top = -36.0
+offset_right = 23.0
+offset_bottom = -10.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+text = "Test"
+horizontal_alignment = 1
