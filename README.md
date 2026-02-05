@@ -6,7 +6,9 @@ Command a spaceship with your friends, complete missions to further upgrade your
 ## Instalation Instructions
 Made using Godot 4.1 Mono
 
-Download files and run in Godot 4.1 or greater. 
+Download Export.zip from releases and decompress contents. Run SpaceGame.exe to play the game.
+
+Alternatively download files and run in Godot 4.1 or greater. 
 Export project as a Windows desktop application and run the resulting .exe
 
 ## Multiplayer Guide
